@@ -1,0 +1,25 @@
+// Z-index
+$z-index-1: 100;
+$z-index-2: 200;
+$z-index-3: 300;
+$z-index-4: 400;
+$z-index-5: 500;
+$z-index-pages: $z-index-1 + 1;
+$z-index-background: $z-index-1;
+$z-index-top: 1000;
+
+// Colours
+$purple: rgb(37, 26, 48);
+$mint: rgb(90, 244, 199);
+
+// Breakpoints
+$bp-tablet-max:        1024px;
+$bp-desktop-1280-min:  ( $bp-tablet-max + 1 );
+$bp-desktop-1280-max:  1280px;
+$bp-desktop-1440-min:  ( $bp-desktop-1280-max + 1 );
+$bp-desktop-1440-max:  1440px;
+$bp-desktop-1680-min:  ( $bp-desktop-1440-max + 1 );
+$bp-desktop-1680-max:  1680px;
+$bp-desktop-1920-min:  ( $bp-desktop-1680-max + 1 );
+$bp-desktop-1920-max:  1920px;
+$bp-desktop-large-min: ( $bp-desktop-1920-max + 1 );
