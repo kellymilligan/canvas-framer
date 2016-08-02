@@ -13,6 +13,7 @@ define([
     return {
 
 
+        appConfig: null,
         windowData: null,
         mouseData: null,
 
@@ -23,6 +24,7 @@ define([
 
         init: function (options) {
 
+            this.appConfig = options.appConfig;
             this.windowData = options.windowData;
             this.mouseData = options.mouseData;
 
@@ -41,6 +43,7 @@ define([
             var child = _.create(object);
 
             child.init({
+                'appConfig': this.appConfig,
                 'windowData': this.windowData,
                 'mouseData': this.mouseData,
                 '$node': $node,

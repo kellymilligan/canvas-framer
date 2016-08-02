@@ -1,0 +1,19 @@
+.controls {
+
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    width: $controls-width;
+    height: 100%;
+
+    background: #1e1c18;
+    box-shadow: rgba( 0, 0, 0, 0.2 ) 1px 0 5px;
+
+    .controls__inner {
+
+        margin: 2rem;
+
+    }
+
+}

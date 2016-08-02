@@ -3,14 +3,16 @@ define([
     'lodash',
     'jquery',
 
-    './pages/home_page'
+    './modules/controls',
+    './modules/workboard'
 
 ], function(
 
     _,
     $,
 
-    HomePage
+    Controls,
+    Workboard
 
 ) { 'use strict';
 
@@ -19,24 +21,26 @@ define([
     var main = {
 
 
-        BASE_WIDTH : 1440,
-
         $window    : null,
         $document  : null,
         $html      : null,
         $root      : null,
 
-        mouseData  : null,
-        windowData : null,
+        $controls  : null,
+        $workboard : null,
 
-        pages      : null,
+        appConfig  : null,
+        windowData : null,
+        mouseData  : null,
+
+        controls   : null,
+        workboard  : null,
 
 
         start: function() {
 
             _.bindAll( this,
                 'onResize',
-                // 'onHashChange',
                 'onMouseMove',
                 'onAnimFrame'
             );
@@ -46,28 +50,57 @@ define([
             this.$html = $(document.documentElement);
             this.$root = $('.js-root');
 
+            this.$controls = $('.js-controls');
+            this.$workboard = $('.js-workboard');
+
+            this.appConfig = {
+
+                // Sizes in mm, portrait by default
+                PAPER_SIZES: {
+                    A0: {
+                        WIDTH: 841,
+                        HEIGHT: 1189
+                    },
+                    A1: {
+                        WIDTH: 594,
+                        HEIGHT: 841
+                    },
+                    A2: {
+                        WIDTH: 420,
+                        HEIGHT: 594
+                    },
+                    A3: {
+                        WIDTH: 297,
+                        HEIGHT: 420
+                    },
+                    A4: {
+                        WIDTH: 210,
+                        HEIGHT: 297
+                    },
+                },
+                PRINT_RESOLUTION: 11.8, // pixels per mm ( 300dpi / 2.54 / 10 )
+                CONTROLS_WIDTH: 200
+            };
+
             this.windowData = {
+
                 width: 0,
                 height: 0,
                 ratio: 0,
-                scale: 0
             };
 
             this.mouseData = {
+
                 x: 0,
                 y: 0,
                 nX: 0,
                 nY: 0
             };
 
-            this.createPages();
+            this.createControls();
+            this.createWorkboard();
 
             this.addEvents();
-
-            // Check for initial route
-            // if ( location.hash ) {
-            //     this.onHashChange();
-            // }
 
             this.onResize();
 
@@ -75,16 +108,29 @@ define([
             window.requestAnimationFrame(this.onAnimFrame);
         },
 
-        createPages: function () {
+        createControls: function () {
 
-            this.pages = {
-                'home': _.create(HomePage)
-            };
+            this.controls = _.create( Controls );
 
-            this.pages.home.init({
+            this.controls.init({
+                'appConfig': this.appConfig,
                 'windowData': this.windowData,
                 'mouseData': this.mouseData,
-                '$node': this.$root.find('.js-home')
+                '$node': this.$controls,
+                'config': {}
+            });
+        },
+
+        createWorkboard: function () {
+
+            this.workboard = _.create( Workboard );
+
+            this.workboard.init({
+                'appConfig': this.appConfig,
+                'windowData': this.windowData,
+                'mouseData': this.mouseData,
+                '$node': this.$workboard,
+                'config': {}
             });
         },
 
@@ -92,8 +138,6 @@ define([
 
             this.$window.on( 'resize', this.onResize );
             this.$document.on( 'mousemove', this.onMouseMove );
-
-            // window.addEventListener( 'hashchange', this.onHashChange, false );
         },
 
 
@@ -104,26 +148,12 @@ define([
             this.windowData.width = this.$window.width();
             this.windowData.height = this.$window.height();
             this.windowData.ratio = this.windowData.width / this.windowData.height;
-            this.windowData.scale = this.windowData.width / this.BASE_WIDTH;
 
             this.$html[0].style.fontSize = 10 * this.windowData.scale + 'px';
 
-            this.pages.home.resize();
+            this.controls.resize();
+            this.workboard.resize();
         },
-
-        // onHashChange: function () {
-
-        //     console.log('Hash change! new hash: ', location.hash);
-
-        //     var hash = location.hash;
-
-        //     switch(hash) {
-
-        //         default:
-        //             this.routeHome();
-        //             break;
-        //     }
-        // },
 
         onMouseMove: function (e) {
 
@@ -132,25 +162,14 @@ define([
 
             this.mouseData.nX = ( this.mouseData.x / this.windowData.width ) * 2 - 1;
             this.mouseData.nY = ( this.mouseData.y / this.windowData.height ) * 2 - 1;
-
-            this.pages.home.mouseMove();
         },
 
         onAnimFrame: function (t) {
 
             var time = Date.now();
 
-            this.pages.home.animFrame(time);
-
             window.requestAnimationFrame(this.onAnimFrame);
-        },
-
-        // ROUTING -----------------------------------------------------
-
-        // routeHome: function () {
-
-        //     this.pages.home.routeHome();
-        // }
+        }
 
     };
 
