@@ -58,28 +58,34 @@ define([
                 // Sizes in mm, portrait by default
                 PAPER_SIZES: {
                     A0: {
-                        WIDTH: 841,
-                        HEIGHT: 1189
+                        WIDTH       : 841,
+                        HEIGHT      : 1189
                     },
                     A1: {
-                        WIDTH: 594,
-                        HEIGHT: 841
+                        WIDTH       : 594,
+                        HEIGHT      : 841
                     },
                     A2: {
-                        WIDTH: 420,
-                        HEIGHT: 594
+                        WIDTH       : 420,
+                        HEIGHT      : 594
                     },
                     A3: {
-                        WIDTH: 297,
-                        HEIGHT: 420
+                        WIDTH       : 297,
+                        HEIGHT      : 420
                     },
                     A4: {
-                        WIDTH: 210,
-                        HEIGHT: 297
+                        WIDTH       : 210,
+                        HEIGHT      : 297
                     },
                 },
-                PRINT_RESOLUTION: 11.8, // pixels per mm ( 300dpi / 2.54 / 10 )
-                CONTROLS_WIDTH: 200
+
+                // pixels per mm ( 300dpi / 2.54 / 10 )
+                PRINT_RESOLUTION    : 11.8,
+
+                CONTROLS_WIDTH      : 200,
+
+                // Selected
+                selectedPrintConfig : null
             };
 
             this.windowData = {
@@ -97,6 +103,8 @@ define([
                 nY: 0
             };
 
+            this.setDefaults();
+
             this.createControls();
             this.createWorkboard();
 
@@ -106,6 +114,18 @@ define([
 
             // Start anim frame
             window.requestAnimationFrame(this.onAnimFrame);
+        },
+
+        setDefaults: function () {
+
+            this.appConfig.selectedPrintConfig = {
+
+                'paperSize'         : this.appConfig.PAPER_SIZES.A2,
+                'paperMarginTop'    : 20,
+                'paperMarginBottom' : 20,
+                'paperMarginLeft'   : 20,
+                'paperMarginRight'  : 20
+            };
         },
 
         createControls: function () {

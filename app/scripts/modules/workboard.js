@@ -21,9 +21,10 @@ define([
     return _.assign( _.create( BaseObject ), {
 
 
-        PAPER_MARIGN: 50,
+        WORKBOARD_MARGIN: 50,
 
         workboardWidth: 0,
+
         paperWidth: 0,
         paperHeight: 0,
 
@@ -51,22 +52,25 @@ define([
 
             this.workboardWidth = this.windowData.width - this.appConfig.CONTROLS_WIDTH;
 
-            this.paperWidth = this.workboardWidth - this.PAPER_MARIGN * 2;
+            this.paperWidth = this.workboardWidth - this.WORKBOARD_MARGIN * 2;
             this.paperHeight = this.paperWidth / 0.707; // TEMP
 
             // Resize preivew
             this.$paper[0].style.width = this.paperWidth + 'px';
             this.$paper[0].style.height = this.paperHeight + 'px';
 
-            this.$paper[0].style.marginLeft = this.PAPER_MARIGN + 'px';
-            this.$paper[0].style.marginRight = this.PAPER_MARIGN + 'px';
+            this.$paper[0].style.marginLeft = this.WORKBOARD_MARGIN + 'px';
+            this.$paper[0].style.marginRight = this.WORKBOARD_MARGIN + 'px';
 
-            this.$node[0].style.paddingTop = this.PAPER_MARIGN - 6 + 'px';
-            this.$node[0].style.paddingBottom = this.PAPER_MARIGN + 'px';
+            this.$node[0].style.paddingTop = this.WORKBOARD_MARGIN - 6 + 'px';
+            this.$node[0].style.paddingBottom = this.WORKBOARD_MARGIN + 'px';
 
             // Resize canvasses
-            this.paperCtx.canvas.width = 3000;
-            this.paperCtx.canvas.height = 2100;
+            var printWidth = this.appConfig.selectedPrintConfig.paperSize.WIDTH * this.appConfig.PRINT_RESOLUTION;
+            var printHeight = this.appConfig.selectedPrintConfig.paperSize.HEIGHT * this.appConfig.PRINT_RESOLUTION;
+
+            this.paperCtx.canvas.width = printWidth;
+            this.paperCtx.canvas.height = printHeight;
         },
 
         mouseMove: function () {
