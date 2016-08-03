@@ -1,6 +1,7 @@
 .workboard {
 
-    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
 
     width: calc( 100% - #{ $controls-width } );
     height: 100%;
