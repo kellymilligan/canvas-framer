@@ -1,4 +1,4 @@
-#HTML app to generate print-resolution and paper size artwork from Canvas graphics
+#HTML app to generate print-resolution artwork from Canvas graphics at common paper sizes (A0 - A4)
 
 ## Install and usage
 
