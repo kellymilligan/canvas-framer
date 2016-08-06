@@ -38,14 +38,17 @@ define([
                 this.ctx.canvas.height
             );
 
-            for ( var i = 0; i < 100; i++ ) {
+            this.ctx.globalCompositeOperation = 'screen';
 
-                var r = parseInt( Math.random() * 255 + 1, 10 );
-                var g = parseInt( Math.random() * 255 + 1, 10 );
-                var b = parseInt( Math.random() * 255 + 1, 10 );
+            for ( var i = 0; i < 500; i++ ) {
 
-                var w = this.width * 0.1 + Math.random() * this.width * 0.4;
-                var h = this.height * 0.1 + Math.random() * this.height * 0.4;
+                var r = 200 + parseInt( Math.random() * 55 + 1, 10 );
+                var g = 20 + parseInt( Math.random() * 155 + 1, 10 );
+                var b = parseInt( Math.random() * 0, 10 );
+
+                var w = this.width * 0.02 + Math.random() * this.width * 0.1;
+                // var h = this.height * 0.1 + Math.random() * this.height * 0.4;
+                var h = w;
 
                 var x = Math.random() * ( this.width - w );
                 var y = Math.random() * ( this.height - h );

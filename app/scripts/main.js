@@ -120,11 +120,11 @@ define([
 
             this.appConfig.selectedPrintConfig = {
 
-                'paperSize'         : this.appConfig.PAPER_SIZES.A3,
-                'paperMarginTop'    : 10,
-                'paperMarginBottom' : 10,
-                'paperMarginLeft'   : 10,
-                'paperMarginRight'  : 10
+                'paperSize'         : this.appConfig.PAPER_SIZES.A2,
+                'paperMarginTop'    : 20,
+                'paperMarginBottom' : 20,
+                'paperMarginLeft'   : 20,
+                'paperMarginRight'  : 20
             };
         },
 
