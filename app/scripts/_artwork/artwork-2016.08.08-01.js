@@ -41,11 +41,11 @@ define([
             this.ctx.globalCompositeOperation = 'screen';
             this.ctx.globalAlpha = 0.01;
 
-            for ( var i = 0; i < 20000; i++ ) {
+            for ( var i = 0; i < 8000; i++ ) {
 
                 var r = 200 + parseInt( Math.random() * 55 + 1, 10 );
                 var g = parseInt( Math.random() * 50 + 1, 10 );
-                var b = parseInt( Math.random() * 70, 10 );
+                var b = parseInt( Math.random() * 100, 10 );
 
                 var w = this.width * 0.02 + Math.random() * this.width * 0.08;
                 // var h = this.height * 0.1 + Math.random() * this.height * 0.4;

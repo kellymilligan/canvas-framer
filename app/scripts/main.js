@@ -120,7 +120,7 @@ define([
 
             this.appConfig.selectedPrintConfig = {
 
-                'paperSize'         : this.appConfig.PAPER_SIZES.A3,
+                'paperSize'         : this.appConfig.PAPER_SIZES.A2,
                 'paperMarginTop'    : 20,
                 'paperMarginBottom' : 20,
                 'paperMarginLeft'   : 20,
