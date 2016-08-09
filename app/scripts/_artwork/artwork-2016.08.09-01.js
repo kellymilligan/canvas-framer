@@ -55,7 +55,7 @@ define([
                 this.ctx.beginPath();
                 this.ctx.moveTo( pX, pY );
 
-                for ( var i = 0; i < 150000; i++ ) {
+                for ( var i = 0; i < 300000; i++ ) {
 
                     var dX = Math.random() > 0.5 ? 1 : -1;
                     var dY = Math.random() > 0.5 ? 1 : -1;
@@ -63,8 +63,8 @@ define([
                     // var x = 10 + Math.random() * ( this.width - 20 );
                     // var y = 10 + Math.random() * ( this.height - 20 );
 
-                    var x = parseInt( Math.min( Math.max( pX + dX, 40 ), this.width - 40 ), 10 );
-                    var y = parseInt( Math.min( Math.max( pY + dY, 40 ), this.height - 40 ), 10 );
+                    var x = Math.min( Math.max( pX + dX, 20 ), this.width - 20 );
+                    var y = Math.min( Math.max( pY + dY, 20 ), this.height - 20 );
 
                     // Prevent rendering over previous pixel
                     // if ( x === pX || y === pY ) { continue; }
