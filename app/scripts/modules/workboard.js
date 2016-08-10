@@ -34,6 +34,8 @@ define([
 
         artwork: null,
 
+        drawConfig: null,
+
         $paper: null,
 
 
@@ -99,8 +101,15 @@ define([
             this.artworkCtx.canvas.height = artworkPaperHeight;
             this.artworkCtx.scale( this.appConfig.PRINT_RESOLUTION, this.appConfig.PRINT_RESOLUTION );
 
-            // Draw
-            this.drawArtwork( paperWidth, paperHeight, paperMargins, artworkPaperWidth, artworkPaperHeight );
+            // Store draw config
+            this.drawConfig = {
+
+                paperWidth: paperWidth,
+                paperHeight: paperHeight,
+                paperMargins: paperMargins,
+                artworkPaperWidth: artworkPaperWidth,
+                artworkPaperHeight: artworkPaperHeight
+            };
         },
 
         mouseMove: function () {
@@ -111,7 +120,7 @@ define([
 
         },
 
-        drawArtwork: function (paperWidth, paperHeight, paperMargins, artworkWidth, artworkHeight) {
+        drawArtwork: function () {
 
             this.artwork.draw();
 
@@ -120,10 +129,10 @@ define([
 
             this.paperCtx.drawImage(
                 this.artworkCtx.canvas,
-                paperMargins.left,
-                paperMargins.top,
-                artworkWidth,
-                artworkHeight
+                this.drawConfig.paperMargins.left,
+                this.drawConfig.paperMargins.top,
+                this.drawConfig.artworkPaperWidth,
+                this.drawConfig.artworkPaperHeight
             );
         }
 

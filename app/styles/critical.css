@@ -40,3 +40,9 @@ html *::after {
     box-sizing: inherit;
 
 }
+
+.root {
+
+    display: none;
+
+}

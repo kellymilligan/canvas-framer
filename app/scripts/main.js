@@ -39,12 +39,6 @@ define([
 
         start: function() {
 
-            _.bindAll( this,
-                'onResize',
-                'onMouseMove',
-                'onAnimFrame'
-            );
-
             this.$window = $(window);
             this.$document = $(document);
             this.$html = $(document.documentElement);
@@ -120,11 +114,16 @@ define([
 
             this.appConfig.selectedPrintConfig = {
 
-                'paperSize'         : this.appConfig.PAPER_SIZES.A2,
+                'paperColour'       : '#fff',
+                'paperSize'         : this.appConfig.PAPER_SIZES.A3,
+                'paperOrientation'  : 'portrait',
                 'paperMarginTop'    : 20,
                 'paperMarginBottom' : 20,
                 'paperMarginLeft'   : 20,
-                'paperMarginRight'  : 20
+                'paperMarginRight'  : 20,
+
+                'drawFixedScale'    : true,
+                'drawFooter'        : false
             };
         },
 
@@ -156,8 +155,17 @@ define([
 
         addEvents: function () {
 
+            _.bindAll( this,
+                'onResize',
+                'onMouseMove',
+                'onAnimFrame',
+                'onControlsDraw'
+            );
+
             this.$window.on( 'resize', this.onResize );
             this.$document.on( 'mousemove', this.onMouseMove );
+
+            this.controls.addEventListener( 'controls:draw', this.onControlsDraw );
         },
 
 
@@ -189,6 +197,11 @@ define([
             var time = Date.now();
 
             window.requestAnimationFrame(this.onAnimFrame);
+        },
+
+        onControlsDraw: function () {
+
+            this.workboard.drawArtwork();
         }
 
     };
