@@ -71,6 +71,10 @@ define([
                         WIDTH       : 210,
                         HEIGHT      : 297
                     },
+                    A5: {
+                        WIDTH       : 148,
+                        HEIGHT      : 210
+                    }
                 },
 
                 // pixels per mm ( 300dpi / 2.54 / 10 )
@@ -117,10 +121,10 @@ define([
                 'paperColour'       : '#fff',
                 'paperSize'         : this.appConfig.PAPER_SIZES.A3,
                 'paperOrientation'  : 'portrait',
-                'paperMarginTop'    : 20,
-                'paperMarginBottom' : 20,
-                'paperMarginLeft'   : 20,
-                'paperMarginRight'  : 20,
+                'paperMarginTop'    : 10,
+                'paperMarginBottom' : 10,
+                'paperMarginLeft'   : 10,
+                'paperMarginRight'  : 10,
 
                 'drawFixedScale'    : true,
                 'drawFooter'        : false

@@ -57,12 +57,14 @@ define([
 
         resize: function () {
 
+            var scaleAdjustment = this.appConfig.selectedPrintConfig.drawFixedScale ? this.appConfig.selectedPrintConfig.paperSize.WIDTH / this.appConfig.PAPER_SIZES.A3.WIDTH : 1;
+
             // Prep for artwork creation
             var artworkWidth = this.appConfig.selectedPrintConfig.paperSize.WIDTH - this.appConfig.selectedPrintConfig.paperMarginLeft - this.appConfig.selectedPrintConfig.paperMarginRight;
             var artworkHeight = this.appConfig.selectedPrintConfig.paperSize.HEIGHT - this.appConfig.selectedPrintConfig.paperMarginTop - this.appConfig.selectedPrintConfig.paperMarginBottom;
 
-            this.artwork.width = artworkWidth;
-            this.artwork.height = artworkHeight;
+            this.artwork.width = artworkWidth / scaleAdjustment;
+            this.artwork.height = artworkHeight / scaleAdjustment;
 
             // Resize preivew
             this.workboardWidth = this.windowData.width - this.appConfig.CONTROLS_WIDTH;
@@ -99,7 +101,8 @@ define([
 
             this.artworkCtx.canvas.width = artworkPaperWidth;
             this.artworkCtx.canvas.height = artworkPaperHeight;
-            this.artworkCtx.scale( this.appConfig.PRINT_RESOLUTION, this.appConfig.PRINT_RESOLUTION );
+
+            this.artworkCtx.scale( this.appConfig.PRINT_RESOLUTION * scaleAdjustment, this.appConfig.PRINT_RESOLUTION * scaleAdjustment );
 
             // Store draw config
             this.drawConfig = {
@@ -122,7 +125,12 @@ define([
 
         drawArtwork: function () {
 
+            this.paperCtx.clearRect( 0, 0, this.paperCtx.canvas.width, this.paperCtx.canvas.height );
+            this.artworkCtx.clearRect( 0, 0, this.artworkCtx.canvas.width, this.artworkCtx.canvas.height );
+
+            this.artworkCtx.save();
             this.artwork.draw();
+            this.artworkCtx.restore();
 
             this.paperCtx.fillStyle = '#fff';
             this.paperCtx.fillRect( 0, 0, this.paperCtx.canvas.width, this.paperCtx.canvas.height );
