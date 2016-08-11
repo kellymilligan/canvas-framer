@@ -24,8 +24,6 @@ define([
         setup: function (options) {
 
             this.ctx = options.config.ctx;
-
-            console.log( this.ctx );
         },
 
         draw: function () {
@@ -55,7 +53,7 @@ define([
                 this.ctx.beginPath();
                 this.ctx.moveTo( pX, pY );
 
-                for ( var i = 0; i < 60000; i++ ) {
+                for ( var i = 0; i < 80000; i++ ) {
 
                     var dX = Math.random() > 0.5 ? 1 : -1;
                     var dY = Math.random() > 0.5 ? 1 : -1;
@@ -67,7 +65,7 @@ define([
                     var y = parseInt( Math.min( Math.max( pY + dY, 40 ), this.height - 40 ), 10 );
 
                     // Prevent rendering over previous pixel
-                    // if ( x === pX || y === pY ) { continue; }
+                    if ( x === pX || y === pY ) { continue; }
 
                     pX = x;
                     pY = y;

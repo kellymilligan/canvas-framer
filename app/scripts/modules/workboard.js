@@ -4,7 +4,7 @@ define([
     'jquery',
     '_baseObject',
 
-    './artwork'
+    '../_artwork/artwork'
 
 ], function(
 
