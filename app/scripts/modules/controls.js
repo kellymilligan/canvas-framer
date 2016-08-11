@@ -66,7 +66,9 @@ define([
                 'onSizeA2Click',
                 'onSizeA3Click',
                 'onSizeA4Click',
-                'onSizeA5Click'
+                'onSizeA5Click',
+                'onOrientationPortraitClick',
+                'onOrientationLandscapeClick'
             );
 
             this.ui.colorWhite.on( 'click', this.onColorWhiteClick );
@@ -78,6 +80,9 @@ define([
             this.ui.sizeA3.on( 'click', this.onSizeA3Click );
             this.ui.sizeA4.on( 'click', this.onSizeA4Click );
             this.ui.sizeA5.on( 'click', this.onSizeA5Click );
+
+            this.ui.orientationPortrait.on( 'click', this.onOrientationPortraitClick );
+            this.ui.orientationLandscape.on( 'click', this.onOrientationLandscapeClick );
 
             this.ui.drawButton.on( 'click', this.onDrawButtonClick );
         },
@@ -146,6 +151,20 @@ define([
 
             this.appConfig.selectedPrintConfig.paperSize = this.appConfig.PAPER_SIZES.A5;
             this.selectPaperSize( this.ui.sizeA5 );
+        },
+
+        onOrientationPortraitClick: function () {
+
+            this.appConfig.selectedPrintConfig.paperOrientation = 'portrait';
+            this.ui.orientationPortrait.addClass( 'is-selected' );
+            this.ui.orientationLandscape.removeClass( 'is-selected' );
+        },
+
+        onOrientationLandscapeClick: function () {
+
+            this.appConfig.selectedPrintConfig.paperOrientation = 'landscape';
+            this.ui.orientationLandscape.addClass( 'is-selected' );
+            this.ui.orientationPortrait.removeClass( 'is-selected' );
         },
 
         onDrawButtonClick: function () {

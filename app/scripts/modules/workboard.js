@@ -57,11 +57,14 @@ define([
 
         resize: function () {
 
+            var width = this.appConfig.selectedPrintConfig.paperOrientation === 'landscape' ? this.appConfig.selectedPrintConfig.paperSize.HEIGHT : this.appConfig.selectedPrintConfig.paperSize.WIDTH;
+            var height = this.appConfig.selectedPrintConfig.paperOrientation === 'landscape' ? this.appConfig.selectedPrintConfig.paperSize.WIDTH : this.appConfig.selectedPrintConfig.paperSize.HEIGHT;
+
             var scaleAdjustment = this.appConfig.selectedPrintConfig.drawFixedScale ? this.appConfig.selectedPrintConfig.paperSize.WIDTH / this.appConfig.PAPER_SIZES.A3.WIDTH : 1;
 
             // Prep for artwork creation
-            var artworkWidth = this.appConfig.selectedPrintConfig.paperSize.WIDTH - this.appConfig.selectedPrintConfig.paperMarginLeft - this.appConfig.selectedPrintConfig.paperMarginRight;
-            var artworkHeight = this.appConfig.selectedPrintConfig.paperSize.HEIGHT - this.appConfig.selectedPrintConfig.paperMarginTop - this.appConfig.selectedPrintConfig.paperMarginBottom;
+            var artworkWidth = width - this.appConfig.selectedPrintConfig.paperMarginLeft - this.appConfig.selectedPrintConfig.paperMarginRight;
+            var artworkHeight = height - this.appConfig.selectedPrintConfig.paperMarginTop - this.appConfig.selectedPrintConfig.paperMarginBottom;
 
             this.artwork.width = artworkWidth / scaleAdjustment;
             this.artwork.height = artworkHeight / scaleAdjustment;
@@ -70,7 +73,7 @@ define([
             this.workboardWidth = this.windowData.width - this.appConfig.CONTROLS_WIDTH;
 
             this.previewWidth = this.workboardWidth - this.WORKBOARD_MARGIN * 2;
-            this.previewHeight = this.previewWidth / 0.707; // TEMP
+            this.previewHeight = this.previewWidth / ( width / height ); // TEMP
 
             this.$paper[0].style.width = this.previewWidth + 'px';
             this.$paper[0].style.height = this.previewHeight + 'px';
@@ -82,8 +85,8 @@ define([
             this.$node[0].style.paddingBottom = this.WORKBOARD_MARGIN + 'px';
 
             // Resize paper canvas
-            var paperWidth = parseInt( this.appConfig.selectedPrintConfig.paperSize.WIDTH * this.appConfig.PRINT_RESOLUTION, 10 );
-            var paperHeight = parseInt( this.appConfig.selectedPrintConfig.paperSize.HEIGHT * this.appConfig.PRINT_RESOLUTION, 10 );
+            var paperWidth = parseInt( width * this.appConfig.PRINT_RESOLUTION, 10 );
+            var paperHeight = parseInt( height * this.appConfig.PRINT_RESOLUTION, 10 );
 
             this.paperCtx.canvas.width = paperWidth;
             this.paperCtx.canvas.height = paperHeight;
