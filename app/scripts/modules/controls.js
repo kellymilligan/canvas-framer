@@ -68,6 +68,10 @@ define([
                 'onSizeA5Click',
                 'onOrientationPortraitClick',
                 'onOrientationLandscapeClick',
+                '_onMarginTopChange',
+                '_onMarginBottomChange',
+                '_onMarginLeftChange',
+                '_onMarginRightChange',
                 'onScaleToggleChange',
                 'onFooterToggleChange',
                 'onDrawButtonClick'
@@ -85,6 +89,11 @@ define([
 
             this.ui.orientationPortrait.on( 'click', this.onOrientationPortraitClick );
             this.ui.orientationLandscape.on( 'click', this.onOrientationLandscapeClick );
+
+            this.ui.marginTop.on( 'change paste keyup', this._onMarginTopChange );
+            this.ui.marginBottom.on( 'change paste keyup', this._onMarginBottomChange );
+            this.ui.marginLeft.on( 'change paste keyup', this._onMarginLeftChange );
+            this.ui.marginRight.on( 'change paste keyup', this._onMarginRightChange );
 
             this.ui.scaleToggle.on( 'change', this.onScaleToggleChange );
             this.ui.footerToggle.on( 'change', this.onFooterToggleChange );
@@ -172,6 +181,27 @@ define([
             this.ui.orientationPortrait.removeClass( 'is-selected' );
         },
 
+        _onMarginTopChange: function () {
+
+            this.appConfig.selectedPrintConfig.paperMarginTop = this.ui.marginTop[0].value;
+        },
+
+        _onMarginBottomChange: function () {
+
+            this.appConfig.selectedPrintConfig.paperMarginBottom = this.ui.marginBottom[0].value;
+        },
+
+        _onMarginLeftChange: function () {
+
+            this.appConfig.selectedPrintConfig.paperMarginLeft = this.ui.marginLeft[0].value;
+        },
+
+        _onMarginRightChange: function () {
+
+            this.appConfig.selectedPrintConfig.paperMarginRight = this.ui.marginRight[0].value;
+        },
+
+
         onScaleToggleChange: function () {
 
             if ( this.ui.scaleToggle[0].checked === true ) {
@@ -186,6 +216,14 @@ define([
 
         onFooterToggleChange: function () {
 
+            if ( this.ui.footerToggle[0].checked === true ) {
+
+                this.appConfig.selectedPrintConfig.drawFooter = true;
+            }
+            else {
+
+                this.appConfig.selectedPrintConfig.drawFooter = false;
+            }
         },
 
         onDrawButtonClick: function () {

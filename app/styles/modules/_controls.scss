@@ -23,4 +23,56 @@
 
     }
 
+    .controls__margin {
+
+        .margin__inputs {
+
+            position: relative;
+            width: 100%;
+            height: 130px;
+
+        }
+
+        input {
+
+            position: absolute;
+
+            width: 50px;
+            padding: 0;
+            margin: 0;
+
+            text-align: center;
+
+            &.margin__top {
+
+                left: 50px;
+                top: 0;
+
+            }
+
+            &.margin__bottom {
+
+                left: 50px;
+                top: 90px;
+
+            }
+
+            &.margin__left {
+
+                left: 15px;
+                top: 45px;
+
+            }
+
+            &.margin__right {
+
+                left: 85px;
+                top: 45px;
+
+            }
+
+        }
+
+    }
+
 }

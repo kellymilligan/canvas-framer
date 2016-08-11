@@ -73,7 +73,7 @@ define([
             this.workboardWidth = this.windowData.width - this.appConfig.CONTROLS_WIDTH;
 
             this.previewWidth = this.workboardWidth - this.WORKBOARD_MARGIN * 2;
-            this.previewHeight = this.previewWidth / ( width / height ); // TEMP
+            this.previewHeight = this.previewWidth / ( width / height );
 
             this.$paper[0].style.width = this.previewWidth + 'px';
             this.$paper[0].style.height = this.previewHeight + 'px';
