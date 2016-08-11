@@ -132,7 +132,7 @@ define([
             this.artwork.draw();
             this.artworkCtx.restore();
 
-            this.paperCtx.fillStyle = '#fff';
+            this.paperCtx.fillStyle = this.appConfig.selectedPrintConfig.paperColour;
             this.paperCtx.fillRect( 0, 0, this.paperCtx.canvas.width, this.paperCtx.canvas.height );
 
             this.paperCtx.drawImage(

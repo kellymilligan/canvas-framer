@@ -60,8 +60,13 @@ define([
         addEvents: function () {
 
             _.bindAll( this,
-                'onDrawButtonClick'
+                'onDrawButtonClick',
+                'onColorWhiteClick',
+                'onColorBlackClick'
             );
+
+            this.ui.colorWhite.on( 'click', this.onColorWhiteClick );
+            this.ui.colorBlack.on( 'click', this.onColorBlackClick );
 
             this.ui.drawButton.on( 'click', this.onDrawButtonClick );
         },
@@ -81,6 +86,16 @@ define([
 
         // Handlers
         // --------
+
+        onColorWhiteClick: function () {
+
+            this.appConfig.selectedPrintConfig.paperColour = '#fff';
+        },
+
+        onColorBlackClick: function () {
+
+            this.appConfig.selectedPrintConfig.paperColour = '#000';
+        },
 
         onDrawButtonClick: function () {
 
