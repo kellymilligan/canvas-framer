@@ -52,8 +52,6 @@ define([
                 saveButton: this.$node.find( '.js-save__button' )
             };
 
-            console.log( this.ui );
-
             this.addEvents();
         },
 
@@ -62,11 +60,24 @@ define([
             _.bindAll( this,
                 'onDrawButtonClick',
                 'onColorWhiteClick',
-                'onColorBlackClick'
+                'onColorBlackClick',
+                'onSizeA0Click',
+                'onSizeA1Click',
+                'onSizeA2Click',
+                'onSizeA3Click',
+                'onSizeA4Click',
+                'onSizeA5Click'
             );
 
             this.ui.colorWhite.on( 'click', this.onColorWhiteClick );
             this.ui.colorBlack.on( 'click', this.onColorBlackClick );
+
+            this.ui.sizeA0.on( 'click', this.onSizeA0Click );
+            this.ui.sizeA1.on( 'click', this.onSizeA1Click );
+            this.ui.sizeA2.on( 'click', this.onSizeA2Click );
+            this.ui.sizeA3.on( 'click', this.onSizeA3Click );
+            this.ui.sizeA4.on( 'click', this.onSizeA4Click );
+            this.ui.sizeA5.on( 'click', this.onSizeA5Click );
 
             this.ui.drawButton.on( 'click', this.onDrawButtonClick );
         },
@@ -90,17 +101,75 @@ define([
         onColorWhiteClick: function () {
 
             this.appConfig.selectedPrintConfig.paperColour = '#fff';
+            this.ui.colorBlack.removeClass( 'is-selected' );
+            this.ui.colorWhite.addClass( 'is-selected' );
         },
 
         onColorBlackClick: function () {
 
             this.appConfig.selectedPrintConfig.paperColour = '#000';
+            this.ui.colorBlack.addClass( 'is-selected' );
+            this.ui.colorWhite.removeClass( 'is-selected' );
+        },
+
+        onSizeA0Click: function () {
+
+            this.appConfig.selectedPrintConfig.paperSize = this.appConfig.PAPER_SIZES.A0;
+            this.selectPaperSize( this.ui.sizeA0 );
+        },
+
+        onSizeA1Click: function () {
+
+            this.appConfig.selectedPrintConfig.paperSize = this.appConfig.PAPER_SIZES.A1;
+            this.selectPaperSize( this.ui.sizeA1 );
+        },
+
+        onSizeA2Click: function () {
+
+            this.appConfig.selectedPrintConfig.paperSize = this.appConfig.PAPER_SIZES.A2;
+            this.selectPaperSize( this.ui.sizeA2 );
+        },
+
+        onSizeA3Click: function () {
+
+            this.appConfig.selectedPrintConfig.paperSize = this.appConfig.PAPER_SIZES.A3;
+            this.selectPaperSize( this.ui.sizeA3 );
+        },
+
+        onSizeA4Click: function () {
+
+            this.appConfig.selectedPrintConfig.paperSize = this.appConfig.PAPER_SIZES.A4;
+            this.selectPaperSize( this.ui.sizeA4 );
+        },
+
+        onSizeA5Click: function () {
+
+            this.appConfig.selectedPrintConfig.paperSize = this.appConfig.PAPER_SIZES.A5;
+            this.selectPaperSize( this.ui.sizeA5 );
         },
 
         onDrawButtonClick: function () {
 
             this.dispatchEvent( { type: 'controls:draw' } );
+        },
+
+
+        // Tools
+        // -----
+
+        selectPaperSize: function ( selectedEl ) {
+
+            this.ui.sizeA0.removeClass( 'is-selected' );
+            this.ui.sizeA1.removeClass( 'is-selected' );
+            this.ui.sizeA2.removeClass( 'is-selected' );
+            this.ui.sizeA3.removeClass( 'is-selected' );
+            this.ui.sizeA4.removeClass( 'is-selected' );
+            this.ui.sizeA5.removeClass( 'is-selected' );
+
+            selectedEl.addClass( 'is-selected ');
         }
+
+
 
     });
 

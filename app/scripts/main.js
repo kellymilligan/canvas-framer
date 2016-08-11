@@ -78,7 +78,7 @@ define([
                 },
 
                 // pixels per mm ( 300dpi / 2.54 / 10 )
-                PRINT_RESOLUTION    : 11.8,
+                PRINT_RESOLUTION    : 11.81102362204724, //11.8,
 
                 CONTROLS_WIDTH      : 200,
 
@@ -205,6 +205,7 @@ define([
 
         onControlsDraw: function () {
 
+            this.onResize();
             this.workboard.drawArtwork();
         }
 

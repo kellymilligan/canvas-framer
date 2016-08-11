@@ -82,8 +82,8 @@ define([
             this.$node[0].style.paddingBottom = this.WORKBOARD_MARGIN + 'px';
 
             // Resize paper canvas
-            var paperWidth = this.appConfig.selectedPrintConfig.paperSize.WIDTH * this.appConfig.PRINT_RESOLUTION;
-            var paperHeight = this.appConfig.selectedPrintConfig.paperSize.HEIGHT * this.appConfig.PRINT_RESOLUTION;
+            var paperWidth = parseInt( this.appConfig.selectedPrintConfig.paperSize.WIDTH * this.appConfig.PRINT_RESOLUTION, 10 );
+            var paperHeight = parseInt( this.appConfig.selectedPrintConfig.paperSize.HEIGHT * this.appConfig.PRINT_RESOLUTION, 10 );
 
             this.paperCtx.canvas.width = paperWidth;
             this.paperCtx.canvas.height = paperHeight;
