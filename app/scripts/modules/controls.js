@@ -58,7 +58,6 @@ define([
         addEvents: function () {
 
             _.bindAll( this,
-                'onDrawButtonClick',
                 'onColorWhiteClick',
                 'onColorBlackClick',
                 'onSizeA0Click',
@@ -68,7 +67,10 @@ define([
                 'onSizeA4Click',
                 'onSizeA5Click',
                 'onOrientationPortraitClick',
-                'onOrientationLandscapeClick'
+                'onOrientationLandscapeClick',
+                'onScaleToggleChange',
+                'onFooterToggleChange',
+                'onDrawButtonClick'
             );
 
             this.ui.colorWhite.on( 'click', this.onColorWhiteClick );
@@ -83,6 +85,9 @@ define([
 
             this.ui.orientationPortrait.on( 'click', this.onOrientationPortraitClick );
             this.ui.orientationLandscape.on( 'click', this.onOrientationLandscapeClick );
+
+            this.ui.scaleToggle.on( 'change', this.onScaleToggleChange );
+            this.ui.footerToggle.on( 'change', this.onFooterToggleChange );
 
             this.ui.drawButton.on( 'click', this.onDrawButtonClick );
         },
@@ -165,6 +170,22 @@ define([
             this.appConfig.selectedPrintConfig.paperOrientation = 'landscape';
             this.ui.orientationLandscape.addClass( 'is-selected' );
             this.ui.orientationPortrait.removeClass( 'is-selected' );
+        },
+
+        onScaleToggleChange: function () {
+
+            if ( this.ui.scaleToggle[0].checked === true ) {
+
+                this.appConfig.selectedPrintConfig.drawFixedScale = true;
+            }
+            else {
+
+                this.appConfig.selectedPrintConfig.drawFixedScale = false;
+            }
+        },
+
+        onFooterToggleChange: function () {
+
         },
 
         onDrawButtonClick: function () {
