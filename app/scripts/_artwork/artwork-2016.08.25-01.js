@@ -62,7 +62,7 @@ define([
                 this.ctx.beginPath();
                 this.ctx.moveTo( pX, pY );
 
-                for ( var i = 0; i < 40000; i++ ) {
+                for ( var i = 0; i < 80000; i++ ) {
 
                     var dX = Math.random() > 0.5 ? 1 : -1;
                     var dY = Math.random() > 0.5 ? 1 : -1;
