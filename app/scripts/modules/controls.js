@@ -74,7 +74,8 @@ define([
                 '_onMarginRightChange',
                 'onScaleToggleChange',
                 'onFooterToggleChange',
-                'onDrawButtonClick'
+                'onDrawButtonClick',
+                'onSaveButtonClick'
             );
 
             this.ui.colorWhite.on( 'click', this.onColorWhiteClick );
@@ -99,6 +100,7 @@ define([
             this.ui.footerToggle.on( 'change', this.onFooterToggleChange );
 
             this.ui.drawButton.on( 'click', this.onDrawButtonClick );
+            this.ui.saveButton.on( 'click', this.onSaveButtonClick );
         },
 
         resize: function () {
@@ -229,6 +231,11 @@ define([
         onDrawButtonClick: function () {
 
             this.dispatchEvent( { type: 'controls:draw' } );
+        },
+
+        onSaveButtonClick: function () {
+
+            this.dispatchEvent( { type: 'controls:save' } );
         },
 
 

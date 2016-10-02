@@ -145,6 +145,11 @@ define([
                 this.drawConfig.artworkPaperWidth,
                 this.drawConfig.artworkPaperHeight
             );
+        },
+
+        getCanvas: function () {
+
+            return this.paperCtx.canvas;
         }
 
     });

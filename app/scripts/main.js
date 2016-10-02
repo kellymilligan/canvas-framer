@@ -163,13 +163,15 @@ define([
                 'onResize',
                 'onMouseMove',
                 'onAnimFrame',
-                'onControlsDraw'
+                'onControlsDraw',
+                'onControlsSave'
             );
 
             this.$window.on( 'resize', this.onResize );
             this.$document.on( 'mousemove', this.onMouseMove );
 
             this.controls.addEventListener( 'controls:draw', this.onControlsDraw );
+            this.controls.addEventListener( 'controls:save', this.onControlsSave );
         },
 
 
@@ -207,6 +209,11 @@ define([
 
             this.onResize();
             this.workboard.drawArtwork();
+        },
+
+        onControlsSave: function () {
+
+            window.open( this.workboard.getCanvas().toDataURL() );
         }
 
     };
