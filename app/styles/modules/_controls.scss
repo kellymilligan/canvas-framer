@@ -11,9 +11,17 @@
     background: #1e1c18;
     box-shadow: rgba( 0, 0, 0, 0.2 ) 1px 0 5px;
 
+    // Turn on scrolling when controls start overlapping
+    @media only screen and (max-height: 820px) {
+
+        width: $controls-width + 15px;
+        overflow-y: scroll;
+
+    }
+
     .controls__inner {
 
-        margin: 2rem;
+        margin: 20px;
 
         h3 {
 
@@ -188,6 +196,13 @@
 
         width: 100%;
         padding: 30px;
+
+        // Turn on scrolling when controls start overlapping
+        @media only screen and (max-height: 820px) {
+
+            position: relative;
+
+        }
 
     }
 
