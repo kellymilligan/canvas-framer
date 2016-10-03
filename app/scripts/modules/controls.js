@@ -45,7 +45,9 @@ define([
                 marginLeft: this.$node.find( '.js-margin__left' ),
                 marginRight: this.$node.find( '.js-margin__right' ),
 
-                scaleToggle: this.$node.find( '.js-scale__toggle' ),
+                scaleFixed: this.$node.find( '.js-scale__fixed' ),
+                scaleToPaper: this.$node.find( '.js-scale__paper' ),
+
                 footerToggle: this.$node.find( '.js-footer__toggle' ),
 
                 drawButton: this.$node.find( '.js-draw__button' ),
@@ -72,7 +74,8 @@ define([
                 '_onMarginBottomChange',
                 '_onMarginLeftChange',
                 '_onMarginRightChange',
-                'onScaleToggleChange',
+                'onScaleFixedClick',
+                'onScaleToPaperClick',
                 'onFooterToggleChange',
                 'onDrawButtonClick',
                 'onSaveButtonClick'
@@ -96,7 +99,9 @@ define([
             this.ui.marginLeft.on( 'change paste keyup', this._onMarginLeftChange );
             this.ui.marginRight.on( 'change paste keyup', this._onMarginRightChange );
 
-            this.ui.scaleToggle.on( 'change', this.onScaleToggleChange );
+            this.ui.scaleFixed.on( 'click', this.onScaleFixedClick );
+            this.ui.scaleToPaper.on( 'click', this.onScaleToPaperClick );
+
             this.ui.footerToggle.on( 'change', this.onFooterToggleChange );
 
             this.ui.drawButton.on( 'click', this.onDrawButtonClick );
@@ -204,16 +209,18 @@ define([
         },
 
 
-        onScaleToggleChange: function () {
+        onScaleFixedClick: function () {
 
-            if ( this.ui.scaleToggle[0].checked === true ) {
+            this.appConfig.selectedPrintConfig.drawFixedScale = true;
+            this.ui.scaleFixed.addClass( 'is-selected' );
+            this.ui.scaleToPaper.removeClass( 'is-selected' );
+        },
 
-                this.appConfig.selectedPrintConfig.drawFixedScale = true;
-            }
-            else {
+        onScaleToPaperClick: function () {
 
-                this.appConfig.selectedPrintConfig.drawFixedScale = false;
-            }
+            this.appConfig.selectedPrintConfig.drawFixedScale = false;
+            this.ui.scaleToPaper.addClass( 'is-selected' );
+            this.ui.scaleFixed.removeClass( 'is-selected' );
         },
 
         onFooterToggleChange: function () {

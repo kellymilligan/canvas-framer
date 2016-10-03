@@ -80,7 +80,7 @@ define([
                 // pixels per mm ( 300dpi / 2.54 / 10 )
                 PRINT_RESOLUTION    : 11.81102362204724, //11.8,
 
-                CONTROLS_WIDTH      : 200,
+                CONTROLS_WIDTH      : 240,
 
                 // Selected
                 selectedPrintConfig : null
