@@ -75,4 +75,63 @@
 
     }
 
+
+    .controls__buttons {
+
+        position: absolute;
+        left: 0;
+        bottom: 0;
+
+        width: 100%;
+        padding: 3rem;
+
+    }
+
+    .draw__button,
+    .save__button {
+
+        display: block;
+        padding: 1rem 0;
+
+        text-align: center;
+
+        color: #1e1c18;
+        font-size: 1.6rem;
+        font-weight: 700;
+        text-decoration: none;
+        cursor: pointer;
+
+        transition: background 100ms ease-in-out;
+
+    }
+
+    .draw__button {
+
+        margin-bottom: 2rem;
+
+        background: #e4a211;
+
+        &:hover {
+
+            background: #da8b10;
+
+        }
+
+    }
+
+    .save__button {
+
+        background: #11e4a2;
+
+        &:hover {
+
+            background: #0FCC82;
+
+        }
+
+    }
+
 }
+
+//#A211E4
+//#8B10DA
