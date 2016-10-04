@@ -47,10 +47,24 @@ define([
             this.paperCtx = paperCanvas.getContext('2d');
             this.$paper.append( paperCanvas );
 
+            // The artwork class is responsible for creating it's required context
             var artworkCanvas = document.createElement( 'canvas' );
-            this.artworkCtx = artworkCanvas.getContext('2d');
+            this.artwork = this.createChild( Artwork, null, { canvas: artworkCanvas } );
 
-            this.artwork = this.createChild( Artwork, null, { ctx: this.artworkCtx } );
+            if ( this.artwork.ctx ) {
+
+                this.artworkCtx = this.artwork.ctx;
+            }
+            else {
+
+                // Handle noContext error and print error message
+                this.artworkCtx = artworkCanvas.getContext( '2d' );
+                this.resize();
+                this.paperCtx.font = "72pt Roboto Mono";
+                this.paperCtx.fillStyle = "red";
+                this.paperCtx.fillText("ERROR: No arwork canvas context... Check console...", 280, 400);
+                throw new Error( 'The artwork canvas doesn\'t have a context! Ensure you\'re creating one in setup() in artwork.js' );
+            }
 
             this.resize();
         },

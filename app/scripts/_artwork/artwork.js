@@ -27,7 +27,7 @@ define([
 
         setup: function (options) {
 
-            this.ctx = options.config.ctx;
+            this.ctx = options.config.canvas.getContext( '2d' );
         },
 
         draw: function () {
