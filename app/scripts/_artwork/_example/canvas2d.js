@@ -29,12 +29,7 @@ define([
         draw: function () {
 
             this.ctx.fillStyle = "rgb(0, 0, 0)";
-            this.ctx.fillRect(
-                0,
-                0,
-                this.ctx.canvas.width,
-                this.ctx.canvas.height
-            );
+            this.ctx.fillRect( 0, 0, this.ctx.canvas.width, this.ctx.canvas.height );
 
             this.ctx.fillStyle = '#0ff';
             this.ctx.globalAlpha = 0.5;
@@ -51,7 +46,6 @@ define([
                     w,
                     h
                 );
-
             }
 
         }

@@ -2,17 +2,13 @@ define([
 
     'lodash',
     'jquery',
-    '_baseObject',
-
-    '../utils/math/distance'
+    '_baseObject'
 
 ], function(
 
     _,
     $,
-    BaseObject,
-
-    distance
+    BaseObject
 
 ) { 'use strict';
 
@@ -33,64 +29,25 @@ define([
         draw: function () {
 
             this.ctx.fillStyle = "rgb(0, 0, 0)";
-            this.ctx.fillRect(
-                0,
-                0,
-                this.ctx.canvas.width,
-                this.ctx.canvas.height
-            );
+            this.ctx.fillRect( 0, 0, this.ctx.canvas.width, this.ctx.canvas.height );
 
+            this.ctx.fillStyle = '#0ff';
+            this.ctx.globalAlpha = 0.5;
             this.ctx.globalCompositeOperation = 'lighter';
-            this.ctx.globalAlpha = 0.65;
 
-            var SEEDS = 3;
-            var seed = 0;
+            for ( var i = 1; i < 200; i++ ) {
 
-            var halfWidth = this.width * 0.5;
-            var halfHeight = this.height * 0.5;
+                var w = Math.random() * 40 + 10;
+                var h = Math.random() * 40 + 10;
 
-            for ( seed; seed < SEEDS; seed++ ) {
-
-                this.ctx.strokeStyle = seed === 0 ? 'rgb(0, 255, 255)' : seed === 1 ? 'rgb(255, 0, 255)' : 'rgb(255, 255, 0)';
-                this.ctx.lineWidth = 0.5;
-
-                // var pX = this.lineWidth * 0.3 + Math.random() * this.width * 0.4;
-                var pX = halfWidth;
-                // var pY = this.height * 0.3 + Math.random() * this.height * 0.4;
-                var pY = halfHeight;
-
-                this.ctx.beginPath();
-                this.ctx.moveTo( pX, pY );
-
-                for ( var i = 0; i < 40000; i++ ) {
-
-                    var dX = Math.random() > 0.5 ? 1 : -1;
-                    var dY = Math.random() > 0.5 ? 1 : -1;
-
-                    // var x = 10 + Math.random() * ( this.width - 20 );
-                    // var y = 10 + Math.random() * ( this.height - 20 );
-
-                    var x = parseInt( Math.min( Math.max( pX + dX, 20 ), this.width - 20 ), 10 );
-                    var y = parseInt( Math.min( Math.max( pY + dY, 20 ), this.height - 20 ), 10 );
-
-                    // Prevent rendering over previous pixel
-                    if ( x === pX || y === pY ) { continue; }
-
-                    // constrain to circle
-                    var d = distance( halfWidth, halfHeight, x, y );
-                    // console.log( d );
-                    if ( d > ( this.width - 40 ) * 0.5 ) { continue; }
-
-                    pX = x;
-                    pY = y;
-
-                    this.ctx.lineTo( x, y );
-                }
-
-                this.ctx.stroke();
-                // this.ctx.closePath();
-
+                this.ctx.fillRect(
+                    this.width * 0.1 + Math.random() * this.width * 0.8 - w * 0.5,
+                    this.height * 0.1 + Math.random() * this.height * 0.8 - h * 0.5,
+                    w,
+                    h
+                );
             }
+
         }
 
     });

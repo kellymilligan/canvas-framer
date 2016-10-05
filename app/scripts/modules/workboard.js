@@ -31,6 +31,7 @@ define([
 
         paperCtx: null,
         artworkCtx: null,
+        artworkCtxType: null,
 
         artwork: null,
 
@@ -54,6 +55,9 @@ define([
             if ( this.artwork.ctx ) {
 
                 this.artworkCtx = this.artwork.ctx;
+
+                if ( this.artworkCtx instanceof CanvasRenderingContext2D ) { this.artworkCtxType = '2d'; }
+                if ( this.artworkCtx instanceof WebGLRenderingContext ) { this.artworkCtxType = 'webgl'; }
             }
             else {
 
@@ -106,6 +110,7 @@ define([
             this.paperCtx.canvas.height = paperHeight;
 
             var paperMargins = {
+
                 top: this.appConfig.selectedPrintConfig.paperMarginTop * this.appConfig.PRINT_RESOLUTION,
                 bottom: this.appConfig.selectedPrintConfig.paperMarginBottom * this.appConfig.PRINT_RESOLUTION,
                 left: this.appConfig.selectedPrintConfig.paperMarginLeft * this.appConfig.PRINT_RESOLUTION,
@@ -119,7 +124,10 @@ define([
             this.artworkCtx.canvas.width = artworkPaperWidth;
             this.artworkCtx.canvas.height = artworkPaperHeight;
 
-            this.artworkCtx.scale( this.appConfig.PRINT_RESOLUTION * scaleAdjustment, this.appConfig.PRINT_RESOLUTION * scaleAdjustment );
+            if ( this.artworkCtxType === '2d' ) {
+
+                this.artworkCtx.scale( this.appConfig.PRINT_RESOLUTION * scaleAdjustment, this.appConfig.PRINT_RESOLUTION * scaleAdjustment );
+            }
 
             // Store draw config
             this.drawConfig = {
@@ -143,11 +151,18 @@ define([
         drawArtwork: function () {
 
             this.paperCtx.clearRect( 0, 0, this.paperCtx.canvas.width, this.paperCtx.canvas.height );
-            this.artworkCtx.clearRect( 0, 0, this.artworkCtx.canvas.width, this.artworkCtx.canvas.height );
 
-            this.artworkCtx.save();
-            this.artwork.draw();
-            this.artworkCtx.restore();
+            if ( this.artworkCtxType === '2d' ) {
+
+                this.artworkCtx.clearRect( 0, 0, this.artworkCtx.canvas.width, this.artworkCtx.canvas.height );
+                this.artworkCtx.save();
+                this.artwork.draw();
+                this.artworkCtx.restore();
+            }
+            else {
+
+                this.artwork.draw();
+            }
 
             this.paperCtx.fillStyle = this.appConfig.selectedPrintConfig.paperColour;
             this.paperCtx.fillRect( 0, 0, this.paperCtx.canvas.width, this.paperCtx.canvas.height );
