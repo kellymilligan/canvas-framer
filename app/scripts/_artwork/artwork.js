@@ -37,7 +37,7 @@ define([
         setup: function (options) {
 
             this.renderer = new THREE.WebGLRenderer({ canvas: options.config.canvas, antialias: true });
-            this.renderer.setPixelRatio( this.appConfig.PRINT_RESOLUTION );
+            // this.renderer.setPixelRatio( this.appConfig.PRINT_RESOLUTION );
             this.renderer.setClearColor( 'rgb(37, 26, 48)', 1 );
 
             this.ctx = this.renderer.context; // Required by the workboard
@@ -70,12 +70,14 @@ define([
         draw: function () {
 
             // Resize
-            this.renderer.setSize( this.width, this.height );
+            this.renderer.setSize( this.width * this.appConfig.PRINT_RESOLUTION, this.height * this.appConfig.PRINT_RESOLUTION );
             this.camera.aspect = this.width / this.height;
             this.camera.updateProjectionMatrix();
 
             // Render
             this.renderer.render( this.scene, this.camera );
+
+            console.log( this.renderer.getSize() );
         }
 
     });

@@ -1,5 +1,7 @@
 #HTML app to generate print-resolution artwork from Canvas graphics at common paper sizes (A0 - A4)
 
+---
+
 ## Install and usage
 
 Ensure you've got [node/npm](https://nodejs.org/en/) installed.
@@ -32,3 +34,8 @@ Run `webpack-dev-server --progress --colors --inline --host 192.168.X.XXX`
 
 Go to `http://192.168.X.XXX:8080/app/` on your own browser or other devices 
 
+---
+
+## Known issues
+
+- When using a WebGL canvas (ThreeJS) I seem to be hitting a resolution limit at higher paper sizes (A0, A1, A2). Attempting to scale the pixel ratio up further leads to a blank white screen at these sizes.
