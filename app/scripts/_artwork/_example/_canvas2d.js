@@ -15,7 +15,7 @@ define([
     return _.assign( _.create( BaseObject ), {
 
 
-        ctx : null,
+        ctx: null, // Must be set in setup()
 
         width: 0,
         height: 0,
