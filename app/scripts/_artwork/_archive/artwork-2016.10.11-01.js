@@ -6,8 +6,8 @@ define([
 
     'three',
 
-    'raw!./ripple-v.shader',
-    'raw!./ripple-f.shader'
+    'raw!../shaders/ripple-v.shader',
+    'raw!../shaders/ripple-f.shader'
 
 ], function(
 
