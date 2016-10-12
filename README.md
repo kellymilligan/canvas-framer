@@ -1,41 +1,31 @@
-#HTML app to generate print-resolution artwork from Canvas graphics at common paper sizes (A0 - A4)
+#HTML app to generate print-resolution artwork from canvas graphics at common paper sizes (A0 - A4)
+
+__The goal__: To be able to draw cool things on an HTML canvas (2d or WebGL), then save down a high (print) resolution render at common paper sizes (A0-A5).
 
 ---
 
-## Install and usage
+## Install and build
 
 Ensure you've got [node/npm](https://nodejs.org/en/) installed.
 
 ####1.
-Install `webpack` and `webpack-dev-server` globally
-`npm install webpack -g`
-`npm install webpack-dev-server -g`
+```
+npm install
+```
 
-####2.
-Run `npm install` 
+####2. 
+```
+npm run dev
+```
 
-####3. 
-Run `webpack-dev-server --progress --colors`
+---
 
-####4.
-Go to `http://localhost:8080/webpack-dev-server/app/` in your browser
+## Usage
 
-### Serving inline:
-You may want to serve the app inline, without the `webpack-dev-server` app frame (e.g. to see url changes correctly). You can do this by adding the `--inline` flag.
-
-Run `webpack-dev-server --progress --colors --inline`
-
-Go to `http://localhost:8080/app/` in your browser
-
-### Serving on network:
-You may want to serve the app so that it can be accessed at your local network IP (e.g. for device testing). Use the `--host` flag and your local network IP address:
-
-Run `webpack-dev-server --progress --colors --inline --host 192.168.X.XXX`
-
-Go to `http://192.168.X.XXX:8080/app/` on your own browser or other devices 
+Edit the `artwork.js` file in `scripts/_artwork` to produce your artwork. You can view example setups for Canvas 2D, Three.JS 3D and a 2D shader (Three.JS) in `scripts/_example`. Open the app in your browser and follow the control panel on the left. 
 
 ---
 
 ## Known issues
 
-- When using a WebGL canvas (ThreeJS) I seem to be hitting a resolution limit at higher paper sizes (A0, A1, A2). Attempting to scale the pixel ratio up further leads to a blank white screen at these sizes.
+- When using a WebGL canvas I seem to be hitting a resolution limit at higher paper sizes (A0, A1, A2). Attempting to scale the pixel ratio up further leads to a blank white screen at these sizes.
