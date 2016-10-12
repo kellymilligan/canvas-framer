@@ -2,10 +2,7 @@
 @import 'base/_variables';
 @import 'base/_mixins';
 @import 'base/_fonts';
-
-// General
-@import 'general/_layout';
-@import 'general/_typography';
+@import 'base/_responsive';
 
 // Modules
 @import 'modules/_controls';
