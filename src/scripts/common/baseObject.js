@@ -1,78 +1,58 @@
-define([
+import _ from 'lodash';
+import $ from 'webpack-zepto';
 
-    'lodash',
-    'jquery'
-
-], function(
-
-    _,
-    $
-
-) { 'use strict';
-
-    return {
+export default {
 
 
-        appConfig: null,
-        windowData: null,
-        mouseData: null,
+    appConfig: null,
+    windowData: null,
+    mouseData: null,
 
-        time: null,
+    time: null,
 
-        $node: null,
+    node: null,
 
 
-        init: function (options) {
+    init: function ( options ) {
 
-            this.appConfig = options.appConfig;
-            this.windowData = options.windowData;
-            this.mouseData = options.mouseData;
+        this.appConfig = options.appConfig;
+        this.windowData = options.windowData;
+        this.mouseData = options.mouseData;
 
-            this.$node = options.$node;
+        this.node = options.node;
 
-            this.setup(options);
-        },
+        this.setup( options );
+    },
 
-        setup: function (options) {},
+    setup: function ( options ) {},
 
-        createChild: function (object, $node, options) {
+    createChild: function ( childObject, node = null, options = {} ) {
 
-            $node = $node || null;
-            options = options || {};
+        var child = Object.create( childObject );
 
-            var child = _.create(object);
+        child.init({
 
-            child.init({
-                'appConfig': this.appConfig,
-                'windowData': this.windowData,
-                'mouseData': this.mouseData,
-                '$node': $node,
-                'config': options
-            });
+            'appConfig': this.appConfig,
+            'windowData': this.windowData,
+            'mouseData': this.mouseData,
+            'node': node,
+            'config': options
+        });
 
-            return child;
-        },
+        return child;
+    },
 
-        resize: function () {},
+    resize: function () {},
 
-        mouseMove: function () {},
+    mouseMove: function () {},
 
-        animFrame: function (t, options) {
+    animFrame: function (t, options) {
 
-            this.time = t;
+        this.time = t;
 
-            this.onAnimFrame(options);
-        },
+        this.onAnimFrame(options);
+    },
 
-        onAnimFrame: function () {},
+    onAnimFrame: function () {},
 
-        applyCssTransform: function (element, transformString) {
-
-            element.style.mozTransform = transformString;
-            element.style.webkitTransform = transformString;
-            element.style.transform = transformString;
-        }
-
-    };
-
-});
+};
