@@ -1,223 +1,198 @@
-define([
+import { _, $ } from './common';
 
-    'lodash',
-    'jquery',
+import Controls from './modules/controls';
+import Workboard from './modules/workboard';
 
-    './modules/controls',
-    './modules/workboard'
-
-], function(
-
-    _,
-    $,
-
-    Controls,
-    Workboard
-
-) { 'use strict';
-
-    require('!style!css!sass!../styles/main.scss');
-
-    var main = {
+export default function () {
 
 
-        $window    : null,
-        $document  : null,
-        $html      : null,
-        $root      : null,
+    let ui = null;
 
-        $controls  : null,
-        $workboard : null,
+    let appConfig = null;
+    let windowData = null;
+    let mouseData = null;
 
-        appConfig  : null,
-        windowData : null,
-        mouseData  : null,
+    let controls = null;
+    let workboard = null;
 
-        controls   : null,
-        workboard  : null,
+    start();
 
 
-        start: function() {
+    // Setup
+    // -----
 
-            this.$window = $(window);
-            this.$document = $(document);
-            this.$html = $(document.documentElement);
-            this.$root = $('.js-root');
+    function start() {
 
-            this.$controls = $('.js-controls');
-            this.$workboard = $('.js-workboard');
+        ui = {
 
-            this.appConfig = {
+            $window: $(window),
+            $document: $(document),
+            $html: $(document.documentElement),
+            $root: $('.js-root'),
+            $controls: $('.js-controls'),
+            $workboard: $('.js-workboard')
+        };
 
-                // Sizes in mm, portrait by default
-                PAPER_SIZES: {
-                    A0: {
-                        WIDTH       : 841,
-                        HEIGHT      : 1189
-                    },
-                    A1: {
-                        WIDTH       : 594,
-                        HEIGHT      : 841
-                    },
-                    A2: {
-                        WIDTH       : 420,
-                        HEIGHT      : 594
-                    },
-                    A3: {
-                        WIDTH       : 297,
-                        HEIGHT      : 420
-                    },
-                    A4: {
-                        WIDTH       : 210,
-                        HEIGHT      : 297
-                    },
-                    A5: {
-                        WIDTH       : 148,
-                        HEIGHT      : 210
-                    }
+        appConfig = {
+
+            // Sizes in mm, portrait by default
+            PAPER_SIZES: {
+                A0: {
+                    WIDTH       : 841,
+                    HEIGHT      : 1189
                 },
+                A1: {
+                    WIDTH       : 594,
+                    HEIGHT      : 841
+                },
+                A2: {
+                    WIDTH       : 420,
+                    HEIGHT      : 594
+                },
+                A3: {
+                    WIDTH       : 297,
+                    HEIGHT      : 420
+                },
+                A4: {
+                    WIDTH       : 210,
+                    HEIGHT      : 297
+                },
+                A5: {
+                    WIDTH       : 148,
+                    HEIGHT      : 210
+                }
+            },
 
-                // pixels per mm ( 300dpi / 2.54 / 10 )
-                PRINT_RESOLUTION    : 11.81102362204724, //11.8,
+            // pixels per mm ( 300dpi / 2.54 / 10 )
+            PRINT_RESOLUTION    : 11.81102362204724, //11.8,
 
-                CONTROLS_WIDTH      : 240,
+            CONTROLS_WIDTH      : 240,
 
-                // Selected
-                selectedPrintConfig : null
-            };
+            // Selected
+            selectedPrintConfig : null
+        };
 
-            this.windowData = {
+        windowData = {
 
-                width: 0,
-                height: 0,
-                ratio: 0,
-            };
+            width: 0,
+            height: 0,
+            ratio: 0,
+        };
 
-            this.mouseData = {
+        mouseData = {
 
-                x: 0,
-                y: 0,
-                nX: 0,
-                nY: 0
-            };
+            x: 0,
+            y: 0,
+            nX: 0,
+            nY: 0
+        };
 
-            this.setDefaults();
+        setDefaults();
 
-            this.createControls();
-            this.createWorkboard();
+        createControls();
+        createWorkboard();
 
-            this.addEvents();
+        addEvents();
 
-            this.onResize();
+        onResize();
 
-            // Start anim frame
-            window.requestAnimationFrame(this.onAnimFrame);
-        },
+        // Start anim frame
+        window.requestAnimationFrame( onAnimFrame );
+    }
 
-        setDefaults: function () {
+    function setDefaults() {
 
-            this.appConfig.selectedPrintConfig = {
+        appConfig.selectedPrintConfig = {
 
-                'paperColour'       : '#fff',
-                'paperSize'         : this.appConfig.PAPER_SIZES.A3,
-                'paperOrientation'  : 'portrait',
-                'paperMarginTop'    : 10,
-                'paperMarginBottom' : 10,
-                'paperMarginLeft'   : 10,
-                'paperMarginRight'  : 10,
+            'paperColour'       : '#fff',
+            'paperSize'         : appConfig.PAPER_SIZES.A3,
+            'paperOrientation'  : 'portrait',
+            'paperMarginTop'    : 10,
+            'paperMarginBottom' : 10,
+            'paperMarginLeft'   : 10,
+            'paperMarginRight'  : 10,
 
-                'drawFixedScale'    : true,
-                'drawFooter'        : false
-            };
-        },
+            'drawFixedScale'    : true,
+            'drawFooter'        : false
+        };
+    }
 
-        createControls: function () {
+    function createControls () {
 
-            this.controls = _.create( Controls );
+        controls = Object.create( Controls );
 
-            this.controls.init({
-                'appConfig': this.appConfig,
-                'windowData': this.windowData,
-                'mouseData': this.mouseData,
-                '$node': this.$controls,
-                'config': {}
-            });
-        },
+        controls.init({
+            'appConfig': appConfig,
+            'windowData': windowData,
+            'mouseData': mouseData,
+            '$node': ui.$controls,
+            'config': {}
+        });
+    }
 
-        createWorkboard: function () {
+    function createWorkboard () {
 
-            this.workboard = _.create( Workboard );
+        workboard = Object.create( Workboard );
 
-            this.workboard.init({
-                'appConfig': this.appConfig,
-                'windowData': this.windowData,
-                'mouseData': this.mouseData,
-                '$node': this.$workboard,
-                'config': {}
-            });
-        },
+        workboard.init({
+            'appConfig': appConfig,
+            'windowData': windowData,
+            'mouseData': mouseData,
+            '$node': ui.$workboard,
+            'config': {}
+        });
+    }
 
-        addEvents: function () {
+    function addEvents () {
 
-            _.bindAll( this,
-                'onResize',
-                'onMouseMove',
-                'onAnimFrame',
-                'onControlsDraw',
-                'onControlsSave'
-            );
+        ui.$window.on( 'resize', onResize );
+        ui.$document.on( 'mousemove', onMouseMove );
 
-            this.$window.on( 'resize', this.onResize );
-            this.$document.on( 'mousemove', this.onMouseMove );
-
-            this.controls.addEventListener( 'controls:draw', this.onControlsDraw );
-            this.controls.addEventListener( 'controls:save', this.onControlsSave );
-        },
+        controls.addEventListener( 'controls:draw', onControlsDraw );
+        controls.addEventListener( 'controls:save', onControlsSave );
+    }
 
 
-        // HANDLERS -----------------------------------------------------
+    // Handlers
+    // --------
 
-        onResize: function () {
+    function onResize () {
 
-            this.windowData.width = this.$window.width();
-            this.windowData.height = this.$window.height();
-            this.windowData.ratio = this.windowData.width / this.windowData.height;
+        windowData.width = ui.$window.width();
+        windowData.height = ui.$window.height();
+        windowData.ratio = windowData.width / windowData.height;
 
-            this.$html[0].style.fontSize = 10 * this.windowData.scale + 'px';
+        ui.$html[0].style.fontSize = 10 * windowData.scale + 'px';
 
-            this.controls.resize();
-            this.workboard.resize();
-        },
+        controls.resize();
+        workboard.resize();
+    }
 
-        onMouseMove: function (e) {
+    function onMouseMove (e) {
 
-            this.mouseData.x = e.clientX;
-            this.mouseData.y = e.clientY;
+        mouseData.x = e.clientX;
+        mouseData.y = e.clientY;
 
-            this.mouseData.nX = ( this.mouseData.x / this.windowData.width ) * 2 - 1;
-            this.mouseData.nY = ( this.mouseData.y / this.windowData.height ) * 2 - 1;
-        },
+        mouseData.nX = ( mouseData.x / windowData.width ) * 2 - 1;
+        mouseData.nY = ( mouseData.y / windowData.height ) * 2 - 1;
+    }
 
-        onAnimFrame: function (t) {
+    function onAnimFrame (t) {
 
-            var time = Date.now();
+        let time = Date.now();
 
-            window.requestAnimationFrame(this.onAnimFrame);
-        },
+        window.requestAnimationFrame( onAnimFrame );
+    }
 
-        onControlsDraw: function () {
+    function onControlsDraw () {
 
-            this.onResize();
-            this.workboard.drawArtwork();
-        },
+        onResize();
+        workboard.drawArtwork();
+    }
 
-        onControlsSave: function () {
+    function onControlsSave () {
 
-            window.open( this.workboard.getCanvas().toDataURL() );
-        }
+        window.open( workboard.getCanvas().toDataURL() );
+    }
 
-    };
-
-    main.start();
-
-});
+}
