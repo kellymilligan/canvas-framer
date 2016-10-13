@@ -31,3 +31,4 @@ An ES5 version of the app can be found in the `feature/es5-legacy` branch.
 ## Known issues
 
 - When using a WebGL canvas I seem to be hitting a resolution limit at higher paper sizes (A0, A1, A2). Attempting to scale the pixel ratio up further leads to a blank white screen at these sizes.
+- Selecting "To paper" for the "scale" setting doesn't work well with WebGL examples. At some paper sizes it works, but at larger paper sizes it seems to hit a rendering limit, giving you a blank white result instead. 
