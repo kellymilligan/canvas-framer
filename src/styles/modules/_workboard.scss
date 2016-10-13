@@ -1,0 +1,26 @@
+.workboard {
+
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+    width: calc( 100% - #{ $controls-width } );
+    height: 100%;
+    margin-left: $controls-width;
+
+    background: #e7e5e2;
+
+    .workboard__paper {
+
+        background: #fff;
+        box-shadow: rgba( 0, 0, 0, 0.05 ) 0 3px 8px;
+
+        > canvas {
+
+            width: 100%;
+            height: 100%;
+
+        }
+
+    }
+
+}

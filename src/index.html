@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="">
+    <head>
+
+        <meta charset="utf-8">
+
+        <title>Canvas poster maker</title>
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="shortcut icon" href="/favicon.ico">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+        <link rel="stylesheet" href="styles/critical.css">
+
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700" rel="stylesheet">
+
+    </head>
+    <body>
+
+        <!--[if lte IE 9]>
+            <p class="browsehappy">I do my best work in more modern browsers, please <a href="http://browsehappy.com/">upgrade your browser</a>.</p>
+        <![endif]-->
+
+        <div class="js-root root">
+
+            <div class="js-controls controls">
+
+                <div class="controls__inner">
+
+                    <div class="controls__paper-colour">
+
+                        <h3>Paper Colour</h3>
+
+                        <a class="is-selected js-paper-colour__white paper-colour__white is-interactive">White</a>
+                        <a class="js-paper-colour__black paper-colour__black is-interactive">Black</a>
+
+                    </div>
+
+                    <div class="controls__paper-size">
+
+                        <h3>Paper size</h3>
+
+                        <a class="js-paper-size__a0 paper-size__a0 is-interactive">A0</a>
+                        <a class="js-paper-size__a1 paper-size__a1 is-interactive">A1</a>
+                        <a class="js-paper-size__a2 paper-size__a2 is-interactive">A2</a>
+                        <a class="is-selected js-paper-size__a3 paper-size__a3 is-interactive">A3</a>
+                        <a class="js-paper-size__a4 paper-size__a4 is-interactive">A4</a>
+                        <a class="js-paper-size__a5 paper-size__a5 is-interactive">A5</a>
+
+                    </div>
+
+                    <div class="controls__orientation">
+
+                        <h3>Orientation</h3>
+
+                        <a class="is-selected js-orientation__portrait orientation__portrait is-interactive">Portrait</a>
+                        <a class="js-orientation__landscape orientation__landscape is-interactive">Landscape</a>
+
+                    </div>
+
+                    <div class="controls__margin">
+
+                        <h3>Margins</h3>
+
+                        <div class="margin__inputs">
+
+                            <input type="text" value="10" class="js-margin__top margin__top">
+                            <input type="text" value="10" class="js-margin__bottom margin__bottom">
+                            <input type="text" value="10" class="js-margin__left margin__left">
+                            <input type="text" value="10" class="js-margin__right margin__right">
+
+                        </div>
+
+                    </div>
+
+                    <div class="controls__scale">
+
+                        <h3>Artwork scaling</h3>
+
+                        <a class="is-selected js-scale__fixed scale__fixed is-interactive">Fixed</a>
+                        <a class="js-scale__paper scale__paper is-interactive">To paper</a>
+
+                    </div>
+
+                    <!-- <div class="controls__footer">
+
+                        <h3>Inlcude footer</h3>
+
+                        <input type="checkbox" class="js-footer__toggle footer__toggle">
+
+                    </div> -->
+
+                    <div class="controls__actions">
+
+                        <div class="controls__draw">
+
+                            <a class="js-draw__button draw__button">Draw</a>
+
+                        </div>
+
+                        <div class="controls__save">
+
+                            <a class="js-save__button save__button">Save</a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="js-workboard workboard">
+
+                <div class="js-workboard__paper workboard__paper">
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <script src="scripts/bundle.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <!-- <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='https://www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X');ga('send','pageview');
+        </script> -->
+    </body>
+</html>
