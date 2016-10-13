@@ -3,6 +3,7 @@
     overflow-x: hidden;
     overflow-y: scroll;
 
+    display: block; // Override critical.css
     width: calc( 100% - #{ $controls-width } );
     height: 100%;
     margin-left: $controls-width;

@@ -116,3 +116,10 @@ a {
     line-height: 1.5;
 
 }
+
+.controls,
+.workboard {
+
+    display: none;
+
+}

@@ -114,12 +114,11 @@ export default function () {
 
             'drawFixedScale'    : true,
             'drawFooter'        : false
+            // 'drawFooter'        : true
         };
     }
 
     function createControls () {
-
-        console.log( ui );
 
         controls = Object.create( Controls );
 

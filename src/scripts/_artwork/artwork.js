@@ -58,6 +58,8 @@ export default Object.assign( Object.create( BaseObject ), {
 
     draw: function () {
 
+        console.log( this.width );
+
         // Resize
         var w = this.width * this.appConfig.PRINT_RESOLUTION;
         var h = this.height * this.appConfig.PRINT_RESOLUTION;

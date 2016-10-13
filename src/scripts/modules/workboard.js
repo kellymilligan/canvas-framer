@@ -1,6 +1,7 @@
 import { _, $, BaseObject } from '../common';
 
 import Artwork from '../_artwork/artwork';
+import Footer from '../_artwork/footer';
 
 export default Object.assign( Object.create( BaseObject ), {
 
@@ -16,8 +17,10 @@ export default Object.assign( Object.create( BaseObject ), {
     paperCtx: null,
     artworkCtx: null,
     artworkCtxType: null,
+    footerCtx: null,
 
     artwork: null,
+    footer: null,
 
     drawConfig: null,
 
@@ -38,6 +41,10 @@ export default Object.assign( Object.create( BaseObject ), {
         // The artwork class is responsible for creating it's required context
         var artworkCanvas = document.createElement( 'canvas' );
         this.artwork = this.createChild( Artwork, null, { canvas: artworkCanvas } );
+
+        var footerCanvas = document.createElement( 'canvas' );
+        this.footerCtx = footerCanvas.getContext( '2d' );
+        this.footer = this.createChild( Footer, null, { ctx: this.footerCtx } );
 
         if ( this.artwork.ctx ) {
 
@@ -122,6 +129,9 @@ export default Object.assign( Object.create( BaseObject ), {
             this.artworkCtx.scale( this.appConfig.PRINT_RESOLUTION * scaleAdjustment, this.appConfig.PRINT_RESOLUTION * scaleAdjustment );
         }
 
+        this.footer.width = artworkPaperWidth + 1;
+        this.footerCtx.scale( this.appConfig.PRINT_RESOLUTION * scaleAdjustment, this.appConfig.PRINT_RESOLUTION * scaleAdjustment );
+
         // Store draw config
         this.drawConfig = {
 
@@ -167,6 +177,17 @@ export default Object.assign( Object.create( BaseObject ), {
             this.drawConfig.artworkPaperWidth,
             this.drawConfig.artworkPaperHeight
         );
+
+        if ( this.appConfig.selectedPrintConfig.drawFooter ) {
+
+            this.footer.draw();
+
+            this.paperCtx.drawImage(
+                this.footerCtx.canvas,
+                this.drawConfig.paperMargins.left,
+                this.drawConfig.paperMargins.top + this.drawConfig.artworkPaperHeight - this.footerCtx.canvas.height
+            );
+        }
     },
 
 
