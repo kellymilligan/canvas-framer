@@ -24,6 +24,8 @@ npm run dev
 
 Edit the `artwork.js` file in `scripts/_artwork` to produce your artwork. You can view example setups for Canvas 2D, Three.JS 3D and a 2D shader (Three.JS) in `scripts/_example`. Open the app in your browser and follow the control panel on the left. 
 
+An ES5 version of the app can be found in the `feature/es5-legacy` branch. 
+
 ---
 
 ## Known issues
