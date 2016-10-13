@@ -1,5 +1,5 @@
 {
-  "name": "poster-canvas",
+  "name": "canvas-poster-maker",
   "version": "1.0.0",
   "description": "HTML app to generate print-resolution artwork from canvas graphics at common paper sizes (A0 - A4)",
   "private": true,

@@ -1,268 +1,255 @@
-define([
+import { _, $, BaseObject } from '../common';
 
-    'lodash',
-    'jquery',
-    '_baseObject',
+import EventDispatcher from '../utils/event-dispatcher';
 
-    '../utils/event-dispatcher'
+export default Object.assign( Object.create( BaseObject ), EventDispatcher, {
 
-], function(
 
-    _,
-    $,
-    BaseObject,
+    ui: null,
 
-    EventDispatcher
 
-) { 'use strict';
+    // Setup
+    // -----
 
-    // return _.assign( _.create( BaseObject ), {
-    return _.assign( _.create( BaseObject ), EventDispatcher, {
+    setup: function (options) {
 
+        this.ui = {
 
-        ui: null,
+            colorWhite: this.node.find( '.js-paper-colour__white' ),
+            colorBlack: this.node.find( '.js-paper-colour__black' ),
 
+            sizeA0: this.node.find( '.js-paper-size__a0' ),
+            sizeA1: this.node.find( '.js-paper-size__a1' ),
+            sizeA2: this.node.find( '.js-paper-size__a2' ),
+            sizeA3: this.node.find( '.js-paper-size__a3' ),
+            sizeA4: this.node.find( '.js-paper-size__a4' ),
+            sizeA5: this.node.find( '.js-paper-size__a5' ),
 
-        setup: function (options) {
+            orientationPortrait: this.node.find( '.js-orientation__portrait' ),
+            orientationLandscape: this.node.find( '.js-orientation__landscape' ),
 
-            this.ui = {
+            marginTop: this.node.find( '.js-margin__top' ),
+            marginBottom: this.node.find( '.js-margin__bottom' ),
+            marginLeft: this.node.find( '.js-margin__left' ),
+            marginRight: this.node.find( '.js-margin__right' ),
 
-                colorWhite: this.$node.find( '.js-paper-colour__white' ),
-                colorBlack: this.$node.find( '.js-paper-colour__black' ),
+            scaleFixed: this.node.find( '.js-scale__fixed' ),
+            scaleToPaper: this.node.find( '.js-scale__paper' ),
 
-                sizeA0: this.$node.find( '.js-paper-size__a0' ),
-                sizeA1: this.$node.find( '.js-paper-size__a1' ),
-                sizeA2: this.$node.find( '.js-paper-size__a2' ),
-                sizeA3: this.$node.find( '.js-paper-size__a3' ),
-                sizeA4: this.$node.find( '.js-paper-size__a4' ),
-                sizeA5: this.$node.find( '.js-paper-size__a5' ),
+            footerToggle: this.node.find( '.js-footer__toggle' ),
 
-                orientationPortrait: this.$node.find( '.js-orientation__portrait' ),
-                orientationLandscape: this.$node.find( '.js-orientation__landscape' ),
+            drawButton: this.node.find( '.js-draw__button' ),
+            saveButton: this.node.find( '.js-save__button' )
+        };
 
-                marginTop: this.$node.find( '.js-margin__top' ),
-                marginBottom: this.$node.find( '.js-margin__bottom' ),
-                marginLeft: this.$node.find( '.js-margin__left' ),
-                marginRight: this.$node.find( '.js-margin__right' ),
+        this.addEvents();
+    },
 
-                scaleFixed: this.$node.find( '.js-scale__fixed' ),
-                scaleToPaper: this.$node.find( '.js-scale__paper' ),
+    addEvents: function () {
 
-                footerToggle: this.$node.find( '.js-footer__toggle' ),
+        _.bindAll( this,
+            'onColorWhiteClick',
+            'onColorBlackClick',
+            'onSizeA0Click',
+            'onSizeA1Click',
+            'onSizeA2Click',
+            'onSizeA3Click',
+            'onSizeA4Click',
+            'onSizeA5Click',
+            'onOrientationPortraitClick',
+            'onOrientationLandscapeClick',
+            '_onMarginTopChange',
+            '_onMarginBottomChange',
+            '_onMarginLeftChange',
+            '_onMarginRightChange',
+            'onScaleFixedClick',
+            'onScaleToPaperClick',
+            'onFooterToggleChange',
+            'onDrawButtonClick',
+            'onSaveButtonClick'
+        );
 
-                drawButton: this.$node.find( '.js-draw__button' ),
-                saveButton: this.$node.find( '.js-save__button' )
-            };
+        this.ui.colorWhite.on( 'click', this.onColorWhiteClick );
+        this.ui.colorBlack.on( 'click', this.onColorBlackClick );
 
-            this.addEvents();
-        },
+        this.ui.sizeA0.on( 'click', this.onSizeA0Click );
+        this.ui.sizeA1.on( 'click', this.onSizeA1Click );
+        this.ui.sizeA2.on( 'click', this.onSizeA2Click );
+        this.ui.sizeA3.on( 'click', this.onSizeA3Click );
+        this.ui.sizeA4.on( 'click', this.onSizeA4Click );
+        this.ui.sizeA5.on( 'click', this.onSizeA5Click );
 
-        addEvents: function () {
+        this.ui.orientationPortrait.on( 'click', this.onOrientationPortraitClick );
+        this.ui.orientationLandscape.on( 'click', this.onOrientationLandscapeClick );
 
-            _.bindAll( this,
-                'onColorWhiteClick',
-                'onColorBlackClick',
-                'onSizeA0Click',
-                'onSizeA1Click',
-                'onSizeA2Click',
-                'onSizeA3Click',
-                'onSizeA4Click',
-                'onSizeA5Click',
-                'onOrientationPortraitClick',
-                'onOrientationLandscapeClick',
-                '_onMarginTopChange',
-                '_onMarginBottomChange',
-                '_onMarginLeftChange',
-                '_onMarginRightChange',
-                'onScaleFixedClick',
-                'onScaleToPaperClick',
-                'onFooterToggleChange',
-                'onDrawButtonClick',
-                'onSaveButtonClick'
-            );
+        this.ui.marginTop.on( 'change paste keyup', this._onMarginTopChange );
+        this.ui.marginBottom.on( 'change paste keyup', this._onMarginBottomChange );
+        this.ui.marginLeft.on( 'change paste keyup', this._onMarginLeftChange );
+        this.ui.marginRight.on( 'change paste keyup', this._onMarginRightChange );
 
-            this.ui.colorWhite.on( 'click', this.onColorWhiteClick );
-            this.ui.colorBlack.on( 'click', this.onColorBlackClick );
+        this.ui.scaleFixed.on( 'click', this.onScaleFixedClick );
+        this.ui.scaleToPaper.on( 'click', this.onScaleToPaperClick );
 
-            this.ui.sizeA0.on( 'click', this.onSizeA0Click );
-            this.ui.sizeA1.on( 'click', this.onSizeA1Click );
-            this.ui.sizeA2.on( 'click', this.onSizeA2Click );
-            this.ui.sizeA3.on( 'click', this.onSizeA3Click );
-            this.ui.sizeA4.on( 'click', this.onSizeA4Click );
-            this.ui.sizeA5.on( 'click', this.onSizeA5Click );
+        this.ui.footerToggle.on( 'change', this.onFooterToggleChange );
 
-            this.ui.orientationPortrait.on( 'click', this.onOrientationPortraitClick );
-            this.ui.orientationLandscape.on( 'click', this.onOrientationLandscapeClick );
+        this.ui.drawButton.on( 'click', this.onDrawButtonClick );
+        this.ui.saveButton.on( 'click', this.onSaveButtonClick );
+    },
 
-            this.ui.marginTop.on( 'change paste keyup', this._onMarginTopChange );
-            this.ui.marginBottom.on( 'change paste keyup', this._onMarginBottomChange );
-            this.ui.marginLeft.on( 'change paste keyup', this._onMarginLeftChange );
-            this.ui.marginRight.on( 'change paste keyup', this._onMarginRightChange );
 
-            this.ui.scaleFixed.on( 'click', this.onScaleFixedClick );
-            this.ui.scaleToPaper.on( 'click', this.onScaleToPaperClick );
+    // Update
+    // ------
 
-            this.ui.footerToggle.on( 'change', this.onFooterToggleChange );
+    resize: function () {
 
-            this.ui.drawButton.on( 'click', this.onDrawButtonClick );
-            this.ui.saveButton.on( 'click', this.onSaveButtonClick );
-        },
+    },
 
-        resize: function () {
+    mouseMove: function () {
 
-        },
+    },
 
-        mouseMove: function () {
+    onAnimFrame: function () {
 
-        },
+    },
 
-        onAnimFrame: function () {
 
-        },
+    // Handlers
+    // --------
 
+    onColorWhiteClick: function () {
 
-        // Handlers
-        // --------
+        this.appConfig.selectedPrintConfig.paperColour = '#fff';
+        this.ui.colorBlack.removeClass( 'is-selected' );
+        this.ui.colorWhite.addClass( 'is-selected' );
+    },
 
-        onColorWhiteClick: function () {
+    onColorBlackClick: function () {
 
-            this.appConfig.selectedPrintConfig.paperColour = '#fff';
-            this.ui.colorBlack.removeClass( 'is-selected' );
-            this.ui.colorWhite.addClass( 'is-selected' );
-        },
+        this.appConfig.selectedPrintConfig.paperColour = '#000';
+        this.ui.colorBlack.addClass( 'is-selected' );
+        this.ui.colorWhite.removeClass( 'is-selected' );
+    },
 
-        onColorBlackClick: function () {
+    onSizeA0Click: function () {
 
-            this.appConfig.selectedPrintConfig.paperColour = '#000';
-            this.ui.colorBlack.addClass( 'is-selected' );
-            this.ui.colorWhite.removeClass( 'is-selected' );
-        },
+        this.appConfig.selectedPrintConfig.paperSize = this.appConfig.PAPER_SIZES.A0;
+        this.selectPaperSize( this.ui.sizeA0 );
+    },
 
-        onSizeA0Click: function () {
+    onSizeA1Click: function () {
 
-            this.appConfig.selectedPrintConfig.paperSize = this.appConfig.PAPER_SIZES.A0;
-            this.selectPaperSize( this.ui.sizeA0 );
-        },
+        this.appConfig.selectedPrintConfig.paperSize = this.appConfig.PAPER_SIZES.A1;
+        this.selectPaperSize( this.ui.sizeA1 );
+    },
 
-        onSizeA1Click: function () {
+    onSizeA2Click: function () {
 
-            this.appConfig.selectedPrintConfig.paperSize = this.appConfig.PAPER_SIZES.A1;
-            this.selectPaperSize( this.ui.sizeA1 );
-        },
+        this.appConfig.selectedPrintConfig.paperSize = this.appConfig.PAPER_SIZES.A2;
+        this.selectPaperSize( this.ui.sizeA2 );
+    },
 
-        onSizeA2Click: function () {
+    onSizeA3Click: function () {
 
-            this.appConfig.selectedPrintConfig.paperSize = this.appConfig.PAPER_SIZES.A2;
-            this.selectPaperSize( this.ui.sizeA2 );
-        },
+        this.appConfig.selectedPrintConfig.paperSize = this.appConfig.PAPER_SIZES.A3;
+        this.selectPaperSize( this.ui.sizeA3 );
+    },
 
-        onSizeA3Click: function () {
+    onSizeA4Click: function () {
 
-            this.appConfig.selectedPrintConfig.paperSize = this.appConfig.PAPER_SIZES.A3;
-            this.selectPaperSize( this.ui.sizeA3 );
-        },
+        this.appConfig.selectedPrintConfig.paperSize = this.appConfig.PAPER_SIZES.A4;
+        this.selectPaperSize( this.ui.sizeA4 );
+    },
 
-        onSizeA4Click: function () {
+    onSizeA5Click: function () {
 
-            this.appConfig.selectedPrintConfig.paperSize = this.appConfig.PAPER_SIZES.A4;
-            this.selectPaperSize( this.ui.sizeA4 );
-        },
+        this.appConfig.selectedPrintConfig.paperSize = this.appConfig.PAPER_SIZES.A5;
+        this.selectPaperSize( this.ui.sizeA5 );
+    },
 
-        onSizeA5Click: function () {
+    onOrientationPortraitClick: function () {
 
-            this.appConfig.selectedPrintConfig.paperSize = this.appConfig.PAPER_SIZES.A5;
-            this.selectPaperSize( this.ui.sizeA5 );
-        },
+        this.appConfig.selectedPrintConfig.paperOrientation = 'portrait';
+        this.ui.orientationPortrait.addClass( 'is-selected' );
+        this.ui.orientationLandscape.removeClass( 'is-selected' );
+    },
 
-        onOrientationPortraitClick: function () {
+    onOrientationLandscapeClick: function () {
 
-            this.appConfig.selectedPrintConfig.paperOrientation = 'portrait';
-            this.ui.orientationPortrait.addClass( 'is-selected' );
-            this.ui.orientationLandscape.removeClass( 'is-selected' );
-        },
+        this.appConfig.selectedPrintConfig.paperOrientation = 'landscape';
+        this.ui.orientationLandscape.addClass( 'is-selected' );
+        this.ui.orientationPortrait.removeClass( 'is-selected' );
+    },
 
-        onOrientationLandscapeClick: function () {
+    _onMarginTopChange: function () {
 
-            this.appConfig.selectedPrintConfig.paperOrientation = 'landscape';
-            this.ui.orientationLandscape.addClass( 'is-selected' );
-            this.ui.orientationPortrait.removeClass( 'is-selected' );
-        },
+        this.appConfig.selectedPrintConfig.paperMarginTop = this.ui.marginTop[0].value;
+    },
 
-        _onMarginTopChange: function () {
+    _onMarginBottomChange: function () {
 
-            this.appConfig.selectedPrintConfig.paperMarginTop = this.ui.marginTop[0].value;
-        },
+        this.appConfig.selectedPrintConfig.paperMarginBottom = this.ui.marginBottom[0].value;
+    },
 
-        _onMarginBottomChange: function () {
+    _onMarginLeftChange: function () {
 
-            this.appConfig.selectedPrintConfig.paperMarginBottom = this.ui.marginBottom[0].value;
-        },
+        this.appConfig.selectedPrintConfig.paperMarginLeft = this.ui.marginLeft[0].value;
+    },
 
-        _onMarginLeftChange: function () {
+    _onMarginRightChange: function () {
 
-            this.appConfig.selectedPrintConfig.paperMarginLeft = this.ui.marginLeft[0].value;
-        },
+        this.appConfig.selectedPrintConfig.paperMarginRight = this.ui.marginRight[0].value;
+    },
 
-        _onMarginRightChange: function () {
+    onScaleFixedClick: function () {
 
-            this.appConfig.selectedPrintConfig.paperMarginRight = this.ui.marginRight[0].value;
-        },
+        this.appConfig.selectedPrintConfig.drawFixedScale = true;
+        this.ui.scaleFixed.addClass( 'is-selected' );
+        this.ui.scaleToPaper.removeClass( 'is-selected' );
+    },
 
+    onScaleToPaperClick: function () {
 
-        onScaleFixedClick: function () {
+        this.appConfig.selectedPrintConfig.drawFixedScale = false;
+        this.ui.scaleToPaper.addClass( 'is-selected' );
+        this.ui.scaleFixed.removeClass( 'is-selected' );
+    },
 
-            this.appConfig.selectedPrintConfig.drawFixedScale = true;
-            this.ui.scaleFixed.addClass( 'is-selected' );
-            this.ui.scaleToPaper.removeClass( 'is-selected' );
-        },
+    onFooterToggleChange: function () {
 
-        onScaleToPaperClick: function () {
+        if ( this.ui.footerToggle[0].checked === true ) {
 
-            this.appConfig.selectedPrintConfig.drawFixedScale = false;
-            this.ui.scaleToPaper.addClass( 'is-selected' );
-            this.ui.scaleFixed.removeClass( 'is-selected' );
-        },
-
-        onFooterToggleChange: function () {
-
-            if ( this.ui.footerToggle[0].checked === true ) {
-
-                this.appConfig.selectedPrintConfig.drawFooter = true;
-            }
-            else {
-
-                this.appConfig.selectedPrintConfig.drawFooter = false;
-            }
-        },
-
-        onDrawButtonClick: function () {
-
-            this.dispatchEvent( { type: 'controls:draw' } );
-        },
-
-        onSaveButtonClick: function () {
-
-            this.dispatchEvent( { type: 'controls:save' } );
-        },
-
-
-        // Tools
-        // -----
-
-        selectPaperSize: function ( selectedEl ) {
-
-            this.ui.sizeA0.removeClass( 'is-selected' );
-            this.ui.sizeA1.removeClass( 'is-selected' );
-            this.ui.sizeA2.removeClass( 'is-selected' );
-            this.ui.sizeA3.removeClass( 'is-selected' );
-            this.ui.sizeA4.removeClass( 'is-selected' );
-            this.ui.sizeA5.removeClass( 'is-selected' );
-
-            selectedEl.addClass( 'is-selected ');
+            this.appConfig.selectedPrintConfig.drawFooter = true;
         }
+        else {
+
+            this.appConfig.selectedPrintConfig.drawFooter = false;
+        }
+    },
+
+    onDrawButtonClick: function () {
+
+        this.dispatchEvent( { type: 'controls:draw' } );
+    },
+
+    onSaveButtonClick: function () {
+
+        this.dispatchEvent( { type: 'controls:save' } );
+    },
 
 
+    // Helpers
+    // -------
 
-    });
+    selectPaperSize: function ( selectedEl ) {
+
+        this.ui.sizeA0.removeClass( 'is-selected' );
+        this.ui.sizeA1.removeClass( 'is-selected' );
+        this.ui.sizeA2.removeClass( 'is-selected' );
+        this.ui.sizeA3.removeClass( 'is-selected' );
+        this.ui.sizeA4.removeClass( 'is-selected' );
+        this.ui.sizeA5.removeClass( 'is-selected' );
+
+        selectedEl.addClass( 'is-selected ');
+    }
 
 });

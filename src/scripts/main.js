@@ -119,13 +119,15 @@ export default function () {
 
     function createControls () {
 
+        console.log( ui );
+
         controls = Object.create( Controls );
 
         controls.init({
             'appConfig': appConfig,
             'windowData': windowData,
             'mouseData': mouseData,
-            '$node': ui.$controls,
+            'node': ui.$controls,
             'config': {}
         });
     }
@@ -138,7 +140,7 @@ export default function () {
             'appConfig': appConfig,
             'windowData': windowData,
             'mouseData': mouseData,
-            '$node': ui.$workboard,
+            'node': ui.$workboard,
             'config': {}
         });
     }

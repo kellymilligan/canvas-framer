@@ -1,45 +1,33 @@
-define([
+import { _, $, BaseObject } from '../common';
 
-    'lodash',
-    'jquery',
-    '_baseObject'
+import Artwork from '../_artwork/artwork';
 
-], function(
-
-    _,
-    $,
-    BaseObject
-
-) { 'use strict';
-
-    return _.assign( _.create( BaseObject ), {
+export default Object.assign( Object.create( BaseObject ), {
 
 
-        FOOTER_HEIGHT: 10,
+    ctx : null,
 
-        ctx : null,
-
-        width: 0,
+    width: 0,
 
 
-        setup: function (options) {
+    setup: function (options) {
 
-            this.ctx = options.config.ctx;
+        this.ctx = options.config.ctx;
 
-            console.log( this.ctx );
-        },
+        console.log( this.ctx );
+    },
 
-        draw: function () {
+    draw: function () {
 
-            this.ctx.fillStyle = "rgb(255, 0, 0)";
-            this.ctx.fillRect(
-                0,
-                0,
-                this.ctx.canvas.width,
-                this.FOOTER_HEIGHT
-            );
-        }
+        const FOOTER_HEIGHT = 10;
 
-    });
+        this.ctx.fillStyle = "rgb(255, 0, 0)";
+        this.ctx.fillRect(
+            0,
+            0,
+            this.ctx.canvas.width,
+            FOOTER_HEIGHT
+        );
+    }
 
 });
