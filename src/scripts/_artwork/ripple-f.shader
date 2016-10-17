@@ -80,13 +80,7 @@ void main() {
     deformation += deform( offsetPos, velocity );
 
     // Clip and apply deformation
-    vec3 color = vec3( smoothstep( 0.49, 0.51, fract( deformation ) ) );
-
-    // Dilute colour strength
-    // color = min( ( color + ( 0.75 ) ), 1.0 );
-
-    // Add grit
-    // color += min( rand( offsetPos + deformation * 0.00005 ) * 0.35, 1.0 );
+    vec3 color = vec3( smoothstep( 0.495, 0.505, fract( deformation ) ) );
 
     gl_FragColor = vec4( color, 1.0 );
 }

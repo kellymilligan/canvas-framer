@@ -33,6 +33,7 @@ module.exports = (options) => {
             new CopyWebpackPlugin([
                 { from: 'src/styles/critical.css', to: 'styles/critical.css' },
                 { from: 'src/images', to: 'images' },
+                { from: 'src/scripts/lib', to: 'scripts/lib' }
             ], {
                 ignore: [],
                 copyUnmodified: true
