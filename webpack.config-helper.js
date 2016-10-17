@@ -91,7 +91,7 @@ module.exports = (options) => {
 
         webpackConfig.devServer = {
             contentBase: './dist',
-            hot: true,
+            hot: false,
             port: options.port,
             inline: true,
             progress: true
