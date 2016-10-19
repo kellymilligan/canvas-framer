@@ -49,7 +49,8 @@ export default Object.assign( Object.create( BaseObject ), {
             detail: 0.58,
             deformation: 1.2,
             depth: 0.25,
-            time: 100
+            time: 100,
+            multiplier: 1
         };
 
         this.uniforms = {
@@ -76,7 +77,8 @@ export default Object.assign( Object.create( BaseObject ), {
         this._gui.add( this._config, 'detail', 0.01, 5, 0.01 );
         this._gui.add( this._config, 'deformation', 0.1, 100, 0.1 );
         this._gui.add( this._config, 'depth', 0.1, 1, 0.01 );
-        this._gui.add( this._config, 'time', 1, 20000000, 1 );
+        this._gui.add( this._config, 'time', 1, 1000, 0.01 );
+        this._gui.add( this._config, 'multiplier', 1, 100000, 0.1 );
     },
 
     applyConfig: function () {
@@ -84,7 +86,7 @@ export default Object.assign( Object.create( BaseObject ), {
         this.uniforms.DETAIL_LEVEL.value = this._config.detail;
         this.uniforms.DEFORMATION_LEVEL.value = this._config.deformation;
         this.uniforms.DEPTH_LEVEL.value = this._config.depth;
-        this.uniforms.TIME.value = this._config.time;
+        this.uniforms.TIME.value = this._config.time * this._config.multiplier;
     },
 
     draw: function () {
