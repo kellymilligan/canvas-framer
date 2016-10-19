@@ -185,7 +185,7 @@ export default Object.assign( Object.create( BaseObject ), {
             this.paperCtx.drawImage(
                 this.footerCtx.canvas,
                 this.drawConfig.paperMargins.left,
-                this.drawConfig.paperMargins.top + this.drawConfig.artworkPaperHeight - this.footerCtx.canvas.height
+                this.drawConfig.paperMargins.top + 2 * this.appConfig.PRINT_RESOLUTION + this.drawConfig.artworkPaperHeight - this.footerCtx.canvas.height
             );
         }
     },

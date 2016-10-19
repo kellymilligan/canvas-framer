@@ -16,13 +16,7 @@
 
 */
 
-export default function (ctx, x, y, r, c, sA, eA, aC, inDegrees) {
-
-    // Apply defaults for omitted optional parameters
-    c = c || true;
-    sA = sA || 0;
-    eA = eA || Math.PI * 2;
-    aC = aC || false;
+export default function (ctx, x, y, r, c = true, sA = 0, eA = Math.PI * 2, aC = false, inDegrees = false) {
 
     // Convert to radians if flagged as degrees
     sA = inDegrees === true ? sA * ( Math.PI / 180 ) : sA;

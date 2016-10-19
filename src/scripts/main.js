@@ -64,7 +64,7 @@ export default function () {
             },
 
             // pixels per mm ( 300dpi / 2.54 / 10 )
-            PRINT_RESOLUTION    : 11.81102362204724, //11.8,
+            PRINT_RESOLUTION    : 11.81102362204724,
 
             CONTROLS_WIDTH      : 240,
 
@@ -104,7 +104,7 @@ export default function () {
 
         appConfig.selectedPrintConfig = {
 
-            'paperColour'       : '#fff',
+            'paperColour'       : 'white',
             'paperSize'         : appConfig.PAPER_SIZES.A3,
             'paperOrientation'  : 'portrait',
             'paperMarginTop'    : 10,
@@ -113,8 +113,7 @@ export default function () {
             'paperMarginRight'  : 10,
 
             'drawFixedScale'    : true,
-            'drawFooter'        : false
-            // 'drawFooter'        : true
+            'drawFooter'        : true
         };
     }
 

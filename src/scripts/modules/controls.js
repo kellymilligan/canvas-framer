@@ -36,7 +36,8 @@ export default Object.assign( Object.create( BaseObject ), EventDispatcher, {
             scaleFixed: this.node.find( '.js-scale__fixed' ),
             scaleToPaper: this.node.find( '.js-scale__paper' ),
 
-            footerToggle: this.node.find( '.js-footer__toggle' ),
+            footerInclude: this.node.find( '.js-footer__include' ),
+            footerExclude: this.node.find( '.js-footer__exclude' ),
 
             drawButton: this.node.find( '.js-draw__button' ),
             saveButton: this.node.find( '.js-save__button' )
@@ -58,13 +59,14 @@ export default Object.assign( Object.create( BaseObject ), EventDispatcher, {
             'onSizeA5Click',
             'onOrientationPortraitClick',
             'onOrientationLandscapeClick',
-            '_onMarginTopChange',
-            '_onMarginBottomChange',
-            '_onMarginLeftChange',
-            '_onMarginRightChange',
+            'onMarginTopChange',
+            'onMarginBottomChange',
+            'onMarginLeftChange',
+            'onMarginRightChange',
             'onScaleFixedClick',
             'onScaleToPaperClick',
-            'onFooterToggleChange',
+            'onFooterIncludeClick',
+            'onFooterExcludeClick',
             'onDrawButtonClick',
             'onSaveButtonClick'
         );
@@ -82,15 +84,16 @@ export default Object.assign( Object.create( BaseObject ), EventDispatcher, {
         this.ui.orientationPortrait.on( 'click', this.onOrientationPortraitClick );
         this.ui.orientationLandscape.on( 'click', this.onOrientationLandscapeClick );
 
-        this.ui.marginTop.on( 'change paste keyup', this._onMarginTopChange );
-        this.ui.marginBottom.on( 'change paste keyup', this._onMarginBottomChange );
-        this.ui.marginLeft.on( 'change paste keyup', this._onMarginLeftChange );
-        this.ui.marginRight.on( 'change paste keyup', this._onMarginRightChange );
+        this.ui.marginTop.on( 'change paste keyup', this.onMarginTopChange );
+        this.ui.marginBottom.on( 'change paste keyup', this.onMarginBottomChange );
+        this.ui.marginLeft.on( 'change paste keyup', this.onMarginLeftChange );
+        this.ui.marginRight.on( 'change paste keyup', this.onMarginRightChange );
 
         this.ui.scaleFixed.on( 'click', this.onScaleFixedClick );
         this.ui.scaleToPaper.on( 'click', this.onScaleToPaperClick );
 
-        this.ui.footerToggle.on( 'change', this.onFooterToggleChange );
+        this.ui.footerInclude.on( 'click', this.onFooterIncludeClick );
+        this.ui.footerExclude.on( 'click', this.onFooterExcludeClick );
 
         this.ui.drawButton.on( 'click', this.onDrawButtonClick );
         this.ui.saveButton.on( 'click', this.onSaveButtonClick );
@@ -118,14 +121,14 @@ export default Object.assign( Object.create( BaseObject ), EventDispatcher, {
 
     onColorWhiteClick: function () {
 
-        this.appConfig.selectedPrintConfig.paperColour = '#fff';
+        this.appConfig.selectedPrintConfig.paperColour = 'white';
         this.ui.colorBlack.removeClass( 'is-selected' );
         this.ui.colorWhite.addClass( 'is-selected' );
     },
 
     onColorBlackClick: function () {
 
-        this.appConfig.selectedPrintConfig.paperColour = '#000';
+        this.appConfig.selectedPrintConfig.paperColour = 'black';
         this.ui.colorBlack.addClass( 'is-selected' );
         this.ui.colorWhite.removeClass( 'is-selected' );
     },
@@ -180,22 +183,22 @@ export default Object.assign( Object.create( BaseObject ), EventDispatcher, {
         this.ui.orientationPortrait.removeClass( 'is-selected' );
     },
 
-    _onMarginTopChange: function () {
+    onMarginTopChange: function () {
 
         this.appConfig.selectedPrintConfig.paperMarginTop = this.ui.marginTop[0].value;
     },
 
-    _onMarginBottomChange: function () {
+    onMarginBottomChange: function () {
 
         this.appConfig.selectedPrintConfig.paperMarginBottom = this.ui.marginBottom[0].value;
     },
 
-    _onMarginLeftChange: function () {
+    onMarginLeftChange: function () {
 
         this.appConfig.selectedPrintConfig.paperMarginLeft = this.ui.marginLeft[0].value;
     },
 
-    _onMarginRightChange: function () {
+    onMarginRightChange: function () {
 
         this.appConfig.selectedPrintConfig.paperMarginRight = this.ui.marginRight[0].value;
     },
@@ -214,16 +217,18 @@ export default Object.assign( Object.create( BaseObject ), EventDispatcher, {
         this.ui.scaleFixed.removeClass( 'is-selected' );
     },
 
-    onFooterToggleChange: function () {
+    onFooterIncludeClick: function  () {
 
-        if ( this.ui.footerToggle[0].checked === true ) {
+        this.appConfig.selectedPrintConfig.drawFooter = true;
+        this.ui.footerInclude.addClass( 'is-selected' );
+        this.ui.footerExclude.removeClass( 'is-selected' );
+    },
 
-            this.appConfig.selectedPrintConfig.drawFooter = true;
-        }
-        else {
+    onFooterExcludeClick: function  () {
 
-            this.appConfig.selectedPrintConfig.drawFooter = false;
-        }
+        this.appConfig.selectedPrintConfig.drawFooter = false;
+        this.ui.footerExclude.addClass( 'is-selected' );
+        this.ui.footerInclude.removeClass( 'is-selected' );
     },
 
     onDrawButtonClick: function () {
