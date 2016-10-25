@@ -23,69 +23,50 @@ export default Object.assign( Object.create( BaseObject ), {
         // this.ctx.fillRect( 0, 0, this.ctx.canvas.width, this.ctx.canvas.height );
 
         this.ctx.globalCompositeOperation = 'multiply';
-        this.ctx.globalAlpha = 0.2;
+        this.ctx.globalAlpha = 0.3;
 
         var colours = [
-            // 'rgb(0, 100, 255)',
-            // 'rgb(0, 255, 100)',
-            // 'rgb(0, 150, 150)',
-            // 'rgb(100, 0, 255)'
-
-            'rgb(255, 0, 86)',
-            'rgb(0, 255, 169)'
-        ];
-
-        var biasX = [
-            0,
-            0/*,
-            0,
-            0*/
-        ];
-
-        var biasY = [
-            0,
-            0/*,
-            0,
-            0*/
+            'rgb(51, 255, 214)',
+            'rgb(51, 255, 227)',
+            'rgb(51, 232, 255)',
+            'rgb(51, 181, 255)',
+            'rgb(51, 130, 255)'
         ];
 
         const SEEDS = colours.length;
         var seed = 0;
 
-        var halfWidth = this.width * 0.5;
-        var halfHeight = this.height * 0.5;
+        var halfWidth = parseInt( this.width * 0.5, 10 );
+        var halfHeight = parseInt( this.height * 0.5, 10 );
 
         for ( seed; seed < SEEDS; seed++ ) {
 
             this.ctx.fillStyle = colours[ seed ];
 
-            let pX = halfWidth + parseInt( halfWidth * biasX[ seed ], 10 );
-            let pY = halfHeight + parseInt( halfHeight * biasY[ seed ], 10 );
+            let pX = halfWidth;
+            let pY = halfHeight;
 
-            for ( let i = 0; i < 100000; i++ ) {
+            for ( let i = 0; i < 30000; i++ ) {
 
                 let r = Math.random() * 0.1 + 0.25;
 
-                // Prevent rendering over previous pos
-                // if ( x === pX || y === pY ) { continue; }
-
-                // constrain to circle
-                // let d = distance( halfWidth, halfHeight, x, y );
-                // if ( d > ( this.width - 40 ) * 0.5 ) { continue; }
-
                 let iteration = this.iterate( pX, pY );
 
-                while ( iteration[ 0 ] === pX && iteration[ 1 ] === pY ) {
+                while ( iteration[ 0 ] === pX || iteration[ 1 ] === pY ) {
 
                     console.log('extra iteration');
                     iteration = this.iterate( pX, pY );
                 }
 
-                drawCircle( this.ctx, iteration[ 0 ], iteration[ 1 ], r );
-                this.ctx.fill();
-
                 pX = iteration[ 0 ];
                 pY = iteration[ 1 ];
+
+                // constrain to circle
+                let d = distance( halfWidth, halfHeight, iteration[ 0 ], iteration[ 1 ] );
+                if ( d > ( this.width - 16 ) * 0.5 ) { continue; }
+
+                drawCircle( this.ctx, iteration[ 0 ], iteration[ 1 ], r );
+                this.ctx.fill();
             }
 
         }
