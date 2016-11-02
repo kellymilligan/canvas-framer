@@ -51,11 +51,11 @@ export default Object.assign( Object.create( BaseObject ), {
 
                 let iteration = this.iterate( pX, pY );
 
-                while ( iteration[ 0 ] === pX || iteration[ 1 ] === pY ) {
+                // while ( iteration[ 0 ] === pX || iteration[ 1 ] === pY ) {
 
-                    console.log('extra iteration');
-                    iteration = this.iterate( pX, pY );
-                }
+                //     console.log('extra iteration');
+                //     iteration = this.iterate( pX, pY );
+                // }
 
                 pX = iteration[ 0 ];
                 pY = iteration[ 1 ];

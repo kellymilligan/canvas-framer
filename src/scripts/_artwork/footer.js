@@ -44,10 +44,13 @@ export default Object.assign( Object.create( BaseObject ), {
         this.ctx.restore();
 
         // Text
-
         var textColor = this.appConfig.selectedPrintConfig.paperColour === 'white' ? 'black' : 'white';
-        var textName = "...";
-        var textMeta = "RENDER #001";
+
+        var renderCount = '' + this.appConfig.currentRenderCount;
+        renderCount = ( '000' + renderCount ).substring( renderCount.length );
+
+        var textName = '...';
+        var textMeta = 'RENDER #' + renderCount;
 
         this.ctx.save();
         this.ctx.textAlign = 'center';

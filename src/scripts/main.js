@@ -69,7 +69,9 @@ export default function () {
             CONTROLS_WIDTH      : 240,
 
             // Selected
-            selectedPrintConfig : null
+            selectedPrintConfig : null,
+
+            currentRenderCount  : 1
         };
 
         windowData = {
@@ -193,6 +195,7 @@ export default function () {
     function onControlsSave () {
 
         window.open( workboard.getCanvas().toDataURL() );
+        this.appConfig.currentRenderCount += 1;
     }
 
 }
