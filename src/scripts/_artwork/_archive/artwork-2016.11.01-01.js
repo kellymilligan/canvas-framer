@@ -29,7 +29,8 @@ export default Object.assign( Object.create( BaseObject ), {
             'rgb(51, 255, 214)',
             'rgb(51, 255, 227)',
             'rgb(51, 232, 255)',
-            'rgb(51, 181, 255)'
+            'rgb(51, 181, 255)',
+            'rgb(51, 130, 255)'
         ];
 
         const SEEDS = colours.length;

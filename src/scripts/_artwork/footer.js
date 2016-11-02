@@ -46,7 +46,7 @@ export default Object.assign( Object.create( BaseObject ), {
         // Text
 
         var textColor = this.appConfig.selectedPrintConfig.paperColour === 'white' ? 'black' : 'white';
-        var textName = "RENDER NAME EXAMPLE";
+        var textName = "...";
         var textMeta = "RENDER #001";
 
         this.ctx.save();
