@@ -4,7 +4,7 @@
     ---
     https://github.com/substack/point-in-polygon
 
-    point       arr     Object with coordinates of the point
+    point       arr     Array with coordinates of the point as [ x, y ]
     polygon     arr     Array of point arrays that form the polygon
 
 */
