@@ -37,16 +37,10 @@ export default Object.assign( Object.create( BaseObject ), {
         var dropAdj = _.map( DROP, function (point) { point[0] *= w; point[1] *= h; return point; } );
 
         const colours = [
-            // 'rgb(51, 255, 214)',
-            // 'rgb(51, 255, 227)',
-            // 'rgb(51, 232, 255)',
-            // 'rgb(51, 181, 255)',
-            // 'rgb(255, 0, 0)'
-            'rgb( 255, 255, 255 )',
-            'rgb( 120, 120, 120 )',
+            'rgb( 140, 140, 140 )',
+            'rgb( 70, 70, 70 )',
             'rgb( 0, 0, 0 )',
-            'rgb( 140, 140, 60 )',
-            'rgb(255, 51, 120)'
+            'rgb(255, 51, 114)'
         ];
 
         const SEEDS = colours.length;
@@ -66,7 +60,7 @@ export default Object.assign( Object.create( BaseObject ), {
             let pX = halfWidth;
             let pY = halfHeight;
 
-            for ( let i = 0; i < 40000; i++ ) {
+            for ( let i = 0; i < 50000; i++ ) {
 
                 let r = Math.random() * 0.1 + 0.25;
 
