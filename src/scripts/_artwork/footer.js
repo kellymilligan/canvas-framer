@@ -4,6 +4,9 @@ import Artwork from '../_artwork/artwork';
 
 import drawCircle from '../utils/canvas/draw_circle';
 
+
+const TEXT_NAME = '...';
+
 export default Object.assign( Object.create( BaseObject ), {
 
 
@@ -44,19 +47,18 @@ export default Object.assign( Object.create( BaseObject ), {
         this.ctx.restore();
 
         // Text
-        var textColor = this.appConfig.selectedPrintConfig.paperColour === 'white' ? 'black' : 'white';
+        const textColor = this.appConfig.selectedPrintConfig.paperColour === 'white' ? 'black' : 'white';
 
-        var renderCount = '' + this.appConfig.currentRenderCount;
+        let renderCount = '' + this.appConfig.currentRenderCount;
         renderCount = ( '000' + renderCount ).substring( renderCount.length );
 
-        var textName = '...';
-        var textMeta = 'RENDER #' + renderCount;
+        let textMeta = 'RENDER #' + renderCount;
 
         this.ctx.save();
         this.ctx.textAlign = 'center';
         this.ctx.fillStyle = textColor;
         this.ctx.font = '24px "Roboto Mono"';
-        this.ctx.fillText( textName, this.width * 0.5, FOOTER_HEIGHT - STAMP_RADIUS * 0.5 );
+        this.ctx.fillText( TEXT_NAME, this.width * 0.5, FOOTER_HEIGHT - STAMP_RADIUS * 0.5 );
         this.ctx.restore();
 
         this.ctx.save();
