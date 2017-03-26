@@ -1,4 +1,4 @@
-#HTML app to generate print-resolution artwork from canvas graphics at common paper sizes (A0 - A4)
+# HTML app to generate print-resolution artwork from canvas graphics at common paper sizes (A0 - A4)
 
 __The goal__: To be able to draw cool things on an HTML canvas (2d or WebGL), then save down a high (print) resolution render at common paper sizes (A0-A5).
 
@@ -8,12 +8,12 @@ __The goal__: To be able to draw cool things on an HTML canvas (2d or WebGL), th
 
 Ensure you've got [node/npm](https://nodejs.org/en/) installed.
 
-####1.
+#### 1.
 ```
 npm install
 ```
 
-####2. 
+#### 2. 
 ```
 npm run dev
 ```
