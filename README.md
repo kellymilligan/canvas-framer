@@ -32,3 +32,11 @@ An ES5 version of the app can be found in the `feature/es5-legacy` branch.
 
 - When using a WebGL canvas I seem to be hitting a resolution limit at higher paper sizes (A0, A1, A2). Attempting to scale the pixel ratio up further leads to a blank white screen at these sizes.
 - Selecting "To paper" for the "Artwork scaling" setting doesn't work well with WebGL examples. At some paper sizes it works, but at larger paper sizes it seems to hit a rendering limit, giving you a blank white result instead. 
+
+---
+
+## To-do's
+
+- Add Custom paper size controls
+- Add saving of current config in local storage and restore upon reload. Include 'reset' link to set back to defaults. 
+- Hide paper colour and 'to paper' scaling options
