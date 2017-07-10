@@ -3,6 +3,8 @@ import { _, $ } from './common';
 import Controls from './modules/controls';
 import Workboard from './modules/workboard';
 
+import dataURItoBlob from './utils/canvas/data_uri_to_blob';
+
 export default function () {
 
 
@@ -194,7 +196,11 @@ export default function () {
 
     function onControlsSave () {
 
-        window.open( workboard.getCanvas().toDataURL() );
+        let url = workboard.getCanvas().toDataURL( 'image/jpeg' );
+        let blob = dataURItoBlob( url );
+        let blob_url = window.URL.createObjectURL( blob );
+        window.open( blob_url );
+
         this.appConfig.currentRenderCount += 1;
     }
 
