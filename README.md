@@ -24,7 +24,7 @@ npm run dev
 
 Edit the `artwork.js` file in `scripts/_artwork` to produce your artwork. You can view example setups for Canvas 2D, Three.JS 3D and a 2D shader (Three.JS) in `scripts/_example`. Open the app in your browser and follow the control panel on the left.
 
-_Using Chrome is recommended for rendering and saving flexibility._
+_Using Chrome is recommended for rendering and saving stability._
 
 ---
 
