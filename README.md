@@ -31,11 +31,16 @@ _Using Chrome is recommended for rendering and saving stability._
 ## To-do's
 
 - Fix controls panel layout wrapping
+- Add webkit scrollbar styling
 - Add saving of current config render counter in local storage and restore upon reload. Include 'reset' link to set back to defaults.
 - Add Custom paper size inputs
 - Add paper size preset options to cover wider range of sizes
 - Hide paper colour control
 - Hide scaling type control
+- Update colour palette
+- Update codebase to use latest template
+- Refactor into VueJS app to abstract fiddly connection logic
+- Branch into 'Screen Framer' for moving artwork at 720p, 1080p, 1440p, 4K and custom screen sizes
 
 ---
 
