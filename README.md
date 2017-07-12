@@ -28,15 +28,17 @@ _Using Chrome is recommended for rendering and saving stability._
 
 ---
 
-## Known issues
+## To-do's
 
-- When using a WebGL canvas I seem to be hitting a resolution limit at higher paper sizes (A0, A1, A2). Attempting to scale the pixel ratio up further leads to a blank white screen at these sizes.
-- Selecting "To paper" for the "Artwork scaling" setting doesn't work well with WebGL examples. At some paper sizes it works, but at larger paper sizes it seems to hit a rendering limit, giving you a blank white result instead.
+- Fix controls panel layout wrapping
+- Add saving of current config render counter in local storage and restore upon reload. Include 'reset' link to set back to defaults.
+- Add Custom paper size inputs
+- Add paper size preset options to cover wider range of sizes
+- Hide paper colour control
+- Hide scaling type control
 
 ---
 
-## To-do's
+## Known issues
 
-- Add Custom paper size controls
-- Add saving of current config in local storage and restore upon reload. Include 'reset' link to set back to defaults.
-- Hide paper colour and 'to paper' scaling options
+- When trying to render a very high resolution (A2+) WebGL scene with a THREE.PerspectiveCamera the result is blank white. I assume there's a hard rendering limit being reached at this size. The problem doesn't seem to affect the THREE.OrthographicCamera, I can get 2D shaders to work at A0.
