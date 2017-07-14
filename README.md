@@ -19,7 +19,11 @@ npm run dev
 ```
 
 #### 3.
+<<<<<<< HEAD
 open `localhost:8080` in your browser
+=======
+open `localhost:8080' in your browser
+>>>>>>> 4d19f5fcea2a146a2dddc6a6a9a28fa0e524f180
 
 ---
 
