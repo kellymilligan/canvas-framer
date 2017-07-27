@@ -22,7 +22,8 @@
 
     .controls__inner {
 
-        margin: 20px;
+        width: $controls-width - ( 20px * 2 );
+        margin: 20px auto;
 
         h3 {
 
