@@ -34,13 +34,14 @@ _Using Chrome is recommended for rendering and saving stability._
 
 ## To-do's
 
-- Fix controls panel layout wrapping
-- Add webkit scrollbar styling
-- Add saving of current config render counter in local storage and restore upon reload. Include 'reset' link to set back to defaults.
+- Add saving of current config in local storage and restore upon reload.
+- Add saving of render count in session storage and restore upon reload.
+- Include 'reset' link to set stored config back to defaults.
+
+### Version 1.0:
+
 - Add Custom paper size inputs
 - Add paper size preset options to cover wider range of sizes
-- Hide paper colour control
-- Hide scaling type control
 - Update colour palette
 - Update codebase to use latest template
 - Refactor into VueJS app to abstract fiddly connection logic
