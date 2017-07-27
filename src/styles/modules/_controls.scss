@@ -15,7 +15,7 @@
     // Turn on scrolling when controls start overlapping
     @media only screen and (max-height: 920px) {
 
-        width: $controls-width + 15px;
+        width: $controls-width + 17px;
         overflow-y: scroll;
 
     }

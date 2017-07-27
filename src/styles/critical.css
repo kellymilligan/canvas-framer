@@ -123,3 +123,7 @@ a {
     display: none;
 
 }
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: #1e1c18; }
+::-webkit-scrollbar-thumb { background: #8b10da; }
