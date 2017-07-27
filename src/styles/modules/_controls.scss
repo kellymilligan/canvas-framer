@@ -13,7 +13,7 @@
     box-shadow: rgba( 0, 0, 0, 0.2 ) 1px 0 5px;
 
     // Turn on scrolling when controls start overlapping
-    @media only screen and (max-height: 920px) {
+    @media only screen and (max-height: $controls-scroll-height) {
 
         width: $controls-width + 17px;
         overflow-y: scroll;
@@ -207,10 +207,10 @@
         bottom: 0;
 
         width: 100%;
-        padding: 30px;
+        padding: 30px 20px;
 
         // Turn on scrolling when controls start overlapping
-        @media only screen and (max-height: 920px) {
+        @media only screen and (max-height: $controls-scroll-height) {
 
             position: relative;
             padding-left: 10px;
