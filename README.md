@@ -1,6 +1,14 @@
 # HTML app to generate print-resolution artwork from canvas graphics at common paper sizes (A0 - A4)
 
-__The goal__: To be able to draw cool things on an HTML canvas (2d or WebGL), then save down a high (print) resolution render at common paper sizes (A0-A5).
+---
+
+## DEPRECATED
+
+I no longer use this app and instead use the superior `canvas-sketch` tooling: [canvas-sketch](https://github.com/mattdesl/canvas-sketch), [GitHub template](https://github.com/kellymilligan/artwork-template)
+
+---
+
+**The goal**: To be able to draw cool things on an HTML canvas (2d or WebGL), then save down a high (print) resolution render at common paper sizes (A0-A5).
 
 ---
 
@@ -9,18 +17,20 @@ __The goal__: To be able to draw cool things on an HTML canvas (2d or WebGL), th
 Ensure you've got [node/npm](https://nodejs.org/en/) installed.
 
 #### 1.
+
 ```
 npm install
 ```
 
 #### 2.
+
 ```
 npm run dev
 ```
 
 #### 3.
-open `localhost:8080` in your browser
 
+open `localhost:8080` in your browser
 
 ---
 
