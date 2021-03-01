@@ -38,7 +38,7 @@
     "sass-loader": "^10.1.0",
     "style-loader": "^2.0.0",
     "sylvester": "0.0.21",
-    "three": "^0.123.0",
+    "three": "^0.125.0",
     "webpack": "^5.10.3",
     "webpack-dev-server": "^3.11.0",
     "webpack-zepto": "0.0.1",
